@@ -19,7 +19,7 @@
         <link rel="next" href="../proposals/v0_8/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../assets/A2UI_dark.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
     
     
@@ -115,6 +115,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/custom.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -151,7 +153,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#a2ui-agent-to-ui-protocol" class="md-skip">
+        <a href="#design-requirements" class="md-skip">
           Skip to content
         </a>
       
@@ -169,8 +171,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="A2UI Protocol Documentation" class="md-header__button md-logo" aria-label="A2UI Protocol Documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../assets/A2UI_light.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -305,8 +306,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="A2UI Protocol Documentation" class="md-nav__button md-logo" aria-label="A2UI Protocol Documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../assets/A2UI_light.svg" alt="logo">
 
     </a>
     A2UI Protocol Documentation
@@ -339,8 +339,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -372,8 +370,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -851,8 +847,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1259,7 +1253,14 @@
   
 
 
-<h1 id="a2ui-agent-to-ui-protocol">A2UI (Agent to UI) Protocol<a class="headerlink" href="#a2ui-agent-to-ui-protocol" title="Permanent link">&para;</a></h1>
+<!-- markdownlint-disable MD041 -->
+<div style="text-align: center;">
+  <div class="centered-logo-text-group">
+    <img src="../assets/A2UI_dark.svg" alt="A2UI Protocol Logo" width="100">
+    <h1>A2UI (Agent to UI) Protocol</h1>
+  </div>
+</div>
+
 <p>A Specification for a JSONL-Based, Streaming UI Protocol</p>
 <p>Created: Sep 19, 2025</p>
 <h2 id="design-requirements">Design Requirements<a class="headerlink" href="#design-requirements" title="Permanent link">&para;</a></h2>
