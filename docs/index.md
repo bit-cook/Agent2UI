@@ -8,6 +8,11 @@ hide:
 <!-- markdownlint-disable MD033 -->
 <div style="text-align: center; margin: 2rem 0 4rem 0;" markdown>
 
+!!! success "Going live Dec 15th"
+
+    A2UI is going live today!  (It's taking a bit longer than expected but will be public soon)
+
+
 <!-- Logo for Light Mode (shows dark logo on light background) -->
 <img src="assets/A2UI_dark.svg" alt="A2UI Logo" width="120" class="light-mode-only" style="margin-bottom: 1rem;">
 <!-- Logo for Dark Mode (shows light logo on dark background) -->
