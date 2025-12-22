@@ -30,6 +30,27 @@
         "text"
       ]
     },
+    "Heading": {
+      "properties": {
+        "text": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            }
+          }
+        },
+        "level": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
     "Image": {
       "properties": {
         "url": {
@@ -114,6 +135,24 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "Icon": {
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "Row": {
@@ -209,6 +248,188 @@
       },
       "required": [
         "children"
+      ]
+    },
+    "Card": {
+      "properties": {
+        "child": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "child"
+      ]
+    },
+    "Divider": {
+      "properties": {},
+      "required": []
+    },
+    "Modal": {
+      "properties": {
+        "entryPointChild": {
+          "type": "string"
+        },
+        "contentChild": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "entryPointChild",
+        "contentChild"
+      ]
+    },
+    "Tabs": {
+      "properties": {
+        "tabItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "object",
+                "properties": {
+                  "literalString": {
+                    "type": "string"
+                  }
+                }
+              },
+              "child": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "tabItems"
+      ]
+    },
+    "Button": {
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            }
+          }
+        },
+        "action": {
+          "type": "object"
+        },
+        "child": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "action"
+      ]
+    },
+    "CheckBox": {
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            }
+          }
+        },
+        "value": {
+          "type": "object",
+          "properties": {
+            "literalBoolean": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ]
+    },
+    "DateTimeInput": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            }
+          }
+        },
+        "enableDate": {
+          "type": "boolean"
+        },
+        "enableTime": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MultipleChoice": {
+      "properties": {
+        "options": {
+          "type": "array"
+        },
+        "selections": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "options",
+        "selections"
+      ]
+    },
+    "Slider": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "properties": {
+            "literalNumber": {
+              "type": "number"
+            }
+          }
+        },
+        "minValue": {
+          "type": "number"
+        },
+        "maxValue": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TextField": {
+      "properties": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            }
+          }
+        },
+        "text": {
+          "type": "object",
+          "properties": {
+            "literalString": {
+              "type": "string"
+            }
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
       ]
     },
     "MdSecondaryTab": {

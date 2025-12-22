@@ -58,6 +58,13 @@ STANDARD_COMPONENTS = {
       },
       "required": ["text"]
     },
+    "Heading": {
+      "properties": {
+        "text": { "type": "object", "properties": { "literalString": { "type": "string" }, "path": { "type": "string" } } },
+        "level": { "type": "number" }
+      },
+      "required": ["text"]
+    },
     "Image": {
       "properties": {
         "url": { "type": "object", "properties": { "literalString": { "type": "string" }, "path": { "type": "string" } } },
@@ -78,6 +85,12 @@ STANDARD_COMPONENTS = {
           "description": { "type": "object", "properties": { "literalString": { "type": "string" }, "path": { "type": "string" } } }
         },
         "required": ["url"]
+    },
+    "Icon": {
+        "properties": {
+            "name": { "type": "object", "properties": { "literalString": { "type": "string" }, "path": { "type": "string" } } }
+        },
+        "required": ["name"]
     },
     "Row": {
       "properties": {
@@ -102,8 +115,323 @@ STANDARD_COMPONENTS = {
         "alignment": { "type": "string", "enum": ["start", "center", "end", "stretch"] }
       },
       "required": ["children"]
+    },
+    "Card": {
+      "properties": {
+        "child": { "type": "string" }
+      },
+      "required": ["child"]
+    },
+    "Divider": {
+      "properties": {},
+      "required": []
+    },
+    "Modal": {
+      "properties": {
+        "entryPointChild": { "type": "string" },
+        "contentChild": { "type": "string" }
+      },
+      "required": ["entryPointChild", "contentChild"]
+    },
+    "Tabs": {
+      "properties": {
+        "tabItems": { 
+          "type": "array", 
+          "items": { 
+            "type": "object",
+            "properties": {
+                "title": { "type": "object", "properties": { "literalString": { "type": "string" } } },
+                "child": { "type": "string" }
+            }
+          } 
+        }
+      },
+      "required": ["tabItems"]
+    },
+    "Button": {
+        "properties": {
+            "label": { "type": "object", "properties": { "literalString": { "type": "string" } } },
+            "action": { "type": "object" },
+            "child": { "type": "string" }
+        },
+        "required": ["label", "action"]
+    },
+    "CheckBox": {
+        "properties": {
+            "label": { "type": "object", "properties": { "literalString": { "type": "string" } } },
+            "value": { "type": "object", "properties": { "literalBoolean": { "type": "boolean" } } }
+        },
+        "required": ["label", "value"]
+    },
+    "DateTimeInput": {
+        "properties": {
+            "value": { "type": "object", "properties": { "literalString": { "type": "string" } } },
+            "enableDate": { "type": "boolean" },
+            "enableTime": { "type": "boolean" }
+        },
+        "required": ["value"]
+    },
+    "MultipleChoice": {
+        "properties": {
+            "options": { "type": "array" },
+            "selections": { "type": "object" }
+        },
+        "required": ["options", "selections"]
+    },
+    "Slider": {
+        "properties": {
+            "value": { "type": "object", "properties": { "literalNumber": { "type": "number" } } },
+            "minValue": { "type": "number" },
+            "maxValue": { "type": "number" }
+        },
+        "required": ["value"]
+    },
+    "TextField": {
+        "properties": {
+            "label": { "type": "object", "properties": { "literalString": { "type": "string" } } },
+            "text": { "type": "object", "properties": { "literalString": { "type": "string" } } },
+            "type": { "type": "string" }
+        },
+        "required": ["label"]
     }
 }
+
+def create_component(type_name, properties):
+    return {
+        "type": type_name,
+        "properties": properties
+    }
+
+MANUAL_EXAMPLES = [
+    {
+      "name": 'Card',
+      "tag": 'Layout',
+      "root": create_component('Card', {
+        "child": create_component('Text', { "text": { "literalString": 'Content inside a card' } }),
+      }),
+    },
+    {
+      "name": 'Column',
+      "tag": 'Layout',
+      "root": create_component('Column', {
+        "children": [
+          create_component('Text', { "text": { "literalString": 'Item 1' } }),
+          create_component('Text', { "text": { "literalString": 'Item 2' } }),
+          create_component('Text', { "text": { "literalString": 'Item 3' } }),
+        ],
+        "alignment": 'center',
+        "distribution": 'space-around',
+      }),
+    },
+    {
+      "name": 'Divider',
+      "tag": 'Layout',
+      "root": create_component('Column', {
+        "children": [
+          create_component('Text', { "text": { "literalString": 'Above Divider' } }),
+          create_component('Divider', {}),
+          create_component('Text', { "text": { "literalString": 'Below Divider' } }),
+        ],
+      }),
+    },
+    {
+      "name": 'List',
+      "tag": 'Layout',
+      "root": create_component('List', {
+        "children": [
+          create_component('Text', { "text": { "literalString": 'List Item 1' } }),
+          create_component('Text', { "text": { "literalString": 'List Item 2' } }),
+          create_component('Text', { "text": { "literalString": 'List Item 3' } }),
+        ],
+        "direction": 'vertical',
+      }),
+    },
+    {
+      "name": 'Modal',
+      "tag": 'Layout',
+      "root": create_component('Modal', {
+        "entryPointChild": create_component('Button', {
+          "action": { "type": 'none' },
+          "child": create_component('Text', { "text": { "literalString": 'Open Modal' } }),
+        }),
+        "contentChild": create_component('Card', {
+          "child": create_component('Text', {
+            "text": { "literalString": 'This is the modal content.' },
+          }),
+        }),
+      }),
+    },
+    {
+      "name": 'Row',
+      "tag": 'Layout',
+      "root": create_component('Row', {
+        "children": [
+          create_component('Text', { "text": { "literalString": 'Left' } }),
+          create_component('Text', { "text": { "literalString": 'Center' } }),
+          create_component('Text', { "text": { "literalString": 'Right' } }),
+        ],
+        "alignment": 'center',
+        "distribution": 'space-between',
+      }),
+    },
+    {
+      "name": 'Tabs',
+      "tag": 'Layout',
+      "root": create_component('Tabs', {
+        "tabItems": [
+          {
+            "title": { "literalString": 'Tab 1' },
+            "child": create_component('Text', { "text": { "literalString": 'Content for Tab 1' } }),
+          },
+          {
+            "title": { "literalString": 'Tab 2' },
+            "child": create_component('Text', { "text": { "literalString": 'Content for Tab 2' } }),
+          },
+        ],
+      }),
+    },
+    {
+      "name": 'Text',
+      "tag": 'Layout',
+      "root": create_component('Column', {
+        "children": [
+          create_component('Heading', { "text": { "literalString": 'Heading Text' } }),
+          create_component('Text', { "text": { "literalString": 'Standard body text.' } }),
+          create_component('Text', {
+            "text": { "literalString": 'Caption text' },
+            "usageHint": 'caption',
+          }),
+        ],
+      }),
+    },
+    {
+      "name": 'AudioPlayer',
+      "tag": 'Media',
+      "root": create_component('AudioPlayer', {
+        "url": { "literalString": 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
+      }),
+    },
+    {
+      "name": 'Icon',
+      "tag": 'Media',
+      "root": create_component('Row', {
+        "children": [
+          create_component('Icon', { "name": { "literalString": 'home' } }),
+          create_component('Icon', { "name": { "literalString": 'favorite' } }),
+          create_component('Icon', { "name": { "literalString": 'settings' } }),
+        ],
+        "distribution": 'space-around',
+      }),
+    },
+    {
+      "name": 'Image',
+      "tag": 'Media',
+      "root": create_component('Image', {
+        "url": { "literalString": 'https://picsum.photos/id/10/300/200' },
+      }),
+    },
+    {
+      "name": 'Video',
+      "tag": 'Media',
+      "root": create_component('Video', {
+        "url": {
+          "literalString":
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        },
+      }),
+    },
+    {
+      "name": 'Button',
+      "tag": 'Inputs',
+      "root": create_component('Row', {
+        "children": [
+          create_component('Button', {
+            "label": { "literalString": 'Primary' },
+            "action": { "type": 'click' },
+            "child": create_component('Text', { "text": { "literalString": 'Primary' } }),
+          }),
+          create_component('Button', {
+            "label": { "literalString": 'Secondary' },
+            "action": { "type": 'click' },
+            "child": create_component('Text', { "text": { "literalString": 'Secondary' } }),
+          }),
+        ],
+        "distribution": 'space-around',
+      }),
+    },
+    {
+      "name": 'CheckBox',
+      "tag": 'Inputs',
+      "root": create_component('Column', {
+        "children": [
+          create_component('CheckBox', {
+            "label": { "literalString": 'Unchecked' },
+            "value": { "literalBoolean": False },
+          }),
+          create_component('CheckBox', {
+            "label": { "literalString": 'Checked' },
+            "value": { "literalBoolean": True },
+          }),
+        ],
+      }),
+    },
+    {
+      "name": 'DateTimeInput',
+      "tag": 'Inputs',
+      "root": create_component('Column', {
+        "children": [
+          create_component('DateTimeInput', {
+            "enableDate": True,
+            "enableTime": False,
+            "value": { "literalString": '2025-12-09' },
+          }),
+          create_component('DateTimeInput', {
+            "enableDate": True,
+            "enableTime": True,
+            "value": { "literalString": '2025-12-09T12:00:00' },
+          }),
+        ],
+      }),
+    },
+    {
+      "name": 'MultipleChoice',
+      "tag": 'Inputs',
+      "root": create_component('MultipleChoice', {
+        "options": [
+          { "value": 'opt1', "label": { "literalString": 'Option 1' } },
+          { "value": 'opt2', "label": { "literalString": 'Option 2' } },
+          { "value": 'opt3', "label": { "literalString": 'Option 3' } },
+        ],
+        "selections": { "literalString": 'opt1' },
+      }),
+    },
+    {
+      "name": 'Slider',
+      "tag": 'Inputs',
+      "root": create_component('Slider', {
+        "value": { "literalNumber": 50 },
+        "minValue": 0,
+        "maxValue": 100,
+      }),
+    },
+    {
+      "name": 'TextField',
+      "tag": 'Inputs',
+      "root": create_component('Column', {
+        "children": [
+          create_component('TextField', {
+            "label": { "literalString": 'Standard Input' },
+            "text": { "literalString": 'Some text' },
+          }),
+          create_component('TextField', {
+            "label": { "literalString": 'Password' },
+            "type": 'password',
+            "text": { "literalString": '' },
+          }),
+        ],
+      }),
+    },
+]
 
 class PropertyDef:
     def __init__(self, name: str, type_str: str, description: str = ""):
@@ -599,10 +927,52 @@ def convert_node_to_json(node, tag_to_class, component_list):
     component_list.append(component_obj)
     return my_id
 
+def flatten_component_tree(node, component_list, prefix=""):
+    # Generate ID if not present
+    my_id = node.get('id', f"{prefix}-{id(node)}")
+    
+    # Process properties recursively
+    props = {}
+    for k, v in node['properties'].items():
+        if isinstance(v, dict) and 'type' in v and 'properties' in v:
+            # It's a component
+            child_id = flatten_component_tree(v, component_list, prefix)
+            props[k] = child_id
+        elif isinstance(v, list):
+            # List of items
+            new_list = []
+            for item in v:
+                if isinstance(item, dict) and 'type' in item and 'properties' in item:
+                     # Component in list
+                     child_id = flatten_component_tree(item, component_list, prefix)
+                     new_list.append(child_id)
+                elif isinstance(item, dict) and 'title' in item and 'child' in item:
+                    # Special case for Tab items
+                    new_item = item.copy()
+                    if isinstance(item['child'], dict) and 'type' in item['child']:
+                        c_id = flatten_component_tree(item['child'], component_list, prefix)
+                        new_item['child'] = c_id
+                    new_list.append(new_item)
+                else:
+                    new_list.append(item)
+            props[k] = new_list
+        else:
+            props[k] = v
+            
+    component_obj = {
+        "id": my_id,
+        "component": {
+            node['type']: props
+        }
+    }
+    component_list.append(component_obj)
+    return my_id
+
 def generate_library_json(components: List[tuple], examples_raw: List[Dict], output_path: str):
     tag_to_class = {}
     class_to_tag = {}
     
+    # Initialize tag maps with Standard Components
     for k in STANDARD_COMPONENTS:
         tag_to_class[k.lower()] = k
         class_to_tag[k] = k.lower()
@@ -629,24 +999,17 @@ def generate_library_json(components: List[tuple], examples_raw: List[Dict], out
         
         scan_targets(root_nodes)
         
-        # We need to process this example for EACH target class to ensure unique IDs if reused?
-        # Or safely reuse if we clone? 
-        # Actually, convert_node_to_json appends to a list.
-        # If we run it once, we get one set of components.
-        # If we associate that set with multiple components, it's fine as long as they are in different blocks.
-        
-        # But wait, we want to generate a fresh list for each block to be safe and clean.
-        
         for cls in target_classes:
             if cls in component_examples:
                 component_examples[cls].append({
                     "header": ex['header'],
                     "description": ex['description'],
-                    "nodes": root_nodes # Pass raw nodes, convert later per block
+                    "nodes": root_nodes 
                 })
     
     blocks = []
     
+    # 1. Generate blocks for Scanned Material Components
     for cls_name, _, props in components:
         examples = component_examples.get(cls_name, [])
         
@@ -700,17 +1063,12 @@ def generate_library_json(components: List[tuple], examples_raw: List[Dict], out
             root_ids.append(root_id)
 
         else:
-            # Render examples
+            # Render examples from Markdown
             for i, ex_data in enumerate(examples):
-                # Header/Desc as separate components if needed? 
-                # For now just render the nodes.
-                
                 for j, node in enumerate(ex_data['nodes']):
-                    # We MUST deep copy node to avoid ID collisions or mutation issues between runs if reused
                     import copy
                     node_copy = copy.deepcopy(node)
                     
-                    # Ensure unique IDs for this iteration
                     def rekey_ids(n, prefix):
                         if 'id' in n: n['id'] = f"{prefix}-{n['id']}"
                         else: n['id'] = f"{prefix}-{id(n)}"
@@ -741,6 +1099,25 @@ def generate_library_json(components: List[tuple], examples_raw: List[Dict], out
             "name": cls_name,
             "tag": "Material",
             "rootId": final_root_id,
+            "components": flat_components
+        })
+        
+    # 2. Append Manual Examples (Standard Components)
+    for i, ex in enumerate(MANUAL_EXAMPLES):
+        flat_components = []
+        # We process the 'root' definition which is a component tree
+        import copy
+        root_copy = copy.deepcopy(ex['root'])
+        
+        # We need unique IDs. 
+        # Using a prefix based on name is good for readability
+        prefix = f"manual-{ex['name']}"
+        root_id = flatten_component_tree(root_copy, flat_components, prefix)
+        
+        blocks.append({
+            "name": ex['name'],
+            "tag": ex['tag'],
+            "rootId": root_id,
             "components": flat_components
         })
 

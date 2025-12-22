@@ -122,12 +122,52 @@ export class LibraryComponent {
       }
     }
 
+    // 2. Inflate the tree (resolve IDs to component objects)
+    const inflatedRoot = this.inflateComponent(componentsMap[rootId], componentsMap);
+
     return {
       rootComponentId: rootId,
       dataModel: new Map(),
       styles: {},
-      componentTree: componentsMap[rootId] as any,
+      componentTree: inflatedRoot,
       components: componentsMap,
     } as any;
+  }
+
+  private inflateComponent(node: any, map: Record<string, any>, visited = new Set<string>()): any {
+    if (!node) return node;
+
+    // Component Reference Resolution
+    if (typeof node === 'string' && map[node]) {
+      if (visited.has(node)) return map[node]; // Cycle detected or already visited, return ref
+      const component = map[node];
+      // We must clone/process this component to inflate ITs properties too
+      visited.add(node);
+      // Important: We need to inflate the properties of the referenced component
+      // We create a copy to avoid mutating the original map entry if reused (though in this context it's fine)
+      return {
+        ...component,
+        properties: this.inflateComponent(component.properties, map, new Set(visited))
+      };
+    }
+
+    if (Array.isArray(node)) {
+      return node.map(item => this.inflateComponent(item, map, new Set(visited)));
+    }
+
+    if (typeof node === 'object') {
+      const copy: any = {};
+      for (const key of Object.keys(node)) {
+        copy[key] = this.inflateComponent(node[key], map, visited); // Pass visited set? Shared or branched?
+        // Branching visited set is safer for tree structure to allow identical subtrees?
+        // But if it IS a tree, shared set prevents cycles.
+        // A2UI is strictly a tree usually. Arrays might contain same component ID twice?
+        // If so, we want to inflate both.
+        // But if we inflate both, we return two objects.
+      }
+      return copy;
+    }
+
+    return node;
   }
 }
