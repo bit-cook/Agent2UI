@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/switch/switch.js';
 
 @Component({
   selector: 'catalog-md-switch',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-switch
@@ -17,14 +18,16 @@ import '@material/web/switch/switch.js';
         [required]="resolvedRequired()"
         [value]="resolvedValue()"
         [disabled]="resolvedDisabled()"
-        [name]="resolvedName()">
-      <ng-content></ng-content>
-    </md-switch>
+        [name]="resolvedName()"><ng-content></ng-content></md-switch>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdSwitch extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly selected = input<Primitives.BooleanValue | boolean | null>(null);
   readonly icons = input<Primitives.BooleanValue | boolean | null>(null);
   readonly showOnlySelectedIcon = input<Primitives.BooleanValue | boolean | null>(null);
@@ -51,7 +54,7 @@ export class MdSwitch extends DynamicComponent {
   });
   protected resolvedValue = computed(() => {
     const v = this.value();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedDisabled = computed(() => {
     const v = this.disabled();
@@ -59,6 +62,6 @@ export class MdSwitch extends DynamicComponent {
   });
   protected resolvedName = computed(() => {
     const v = this.name();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

@@ -210,6 +210,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('primary', () => ('primary' in properties && properties['primary']) ?? undefined),
       inputBinding('secondary', () => ('secondary' in properties && properties['secondary']) ?? undefined),
       inputBinding('tertiary', () => ('tertiary' in properties && properties['tertiary']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdBrandedFab: {
@@ -374,6 +375,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('hasIcon', () => ('hasIcon' in properties && properties['hasIcon']) ?? undefined),
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdTextButton: {
@@ -388,6 +390,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('hasIcon', () => ('hasIcon' in properties && properties['hasIcon']) ?? undefined),
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdOutlinedButton: {
@@ -402,6 +405,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('hasIcon', () => ('hasIcon' in properties && properties['hasIcon']) ?? undefined),
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdElevatedButton: {
@@ -416,6 +420,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('hasIcon', () => ('hasIcon' in properties && properties['hasIcon']) ?? undefined),
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdListItem: {
@@ -514,6 +519,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
       inputBinding('filled', () => ('filled' in properties && properties['filled']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdFilledTonalIconButton: {
@@ -530,6 +536,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('selected', () => ('selected' in properties && properties['selected']) ?? undefined),
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdOutlinedIconButton: {
@@ -547,6 +554,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
       inputBinding('outlined', () => ('outlined' in properties && properties['outlined']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdIconButton: {
@@ -564,6 +572,7 @@ export const MATERIAL3_CATALOG = {
       inputBinding('type', () => ('type' in properties && properties['type']) ?? undefined),
       inputBinding('value', () => ('value' in properties && properties['value']) ?? undefined),
       inputBinding('standard', () => ('standard' in properties && properties['standard']) ?? undefined),
+      inputBinding('children', () => ('children' in properties && properties['children']) ?? undefined),
     ],
   },
   MdFilledSelect: {
@@ -631,7 +640,7 @@ export const MATERIAL3_CATALOG = {
   MdIcon: {
     type: () => import('./md-icon').then(c => c.MdIcon),
     bindings: ({ properties }) => [
-
+      inputBinding('child', () => ('child' in properties && properties['child']) ?? undefined),
     ],
   },
 } as Catalog;

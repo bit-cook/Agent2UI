@@ -925,6 +925,10 @@
         "tertiary": {
           "type": "boolean",
           "description": ""
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1437,6 +1441,10 @@
         "value": {
           "type": "string",
           "description": "The value added to a form with the button's name when the button submits a form."
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1477,6 +1485,10 @@
         "value": {
           "type": "string",
           "description": "The value added to a form with the button's name when the button submits a form."
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1517,6 +1529,10 @@
         "value": {
           "type": "string",
           "description": "The value added to a form with the button's name when the button submits a form."
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1557,6 +1573,10 @@
         "value": {
           "type": "string",
           "description": "The value added to a form with the button's name when the button submits a form."
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1816,6 +1836,10 @@
         "filled": {
           "type": "boolean",
           "description": ""
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1864,6 +1888,10 @@
         "value": {
           "type": "string",
           "description": "The value added to a form with the button's name when the button submits a form."
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1916,6 +1944,10 @@
         "outlined": {
           "type": "boolean",
           "description": ""
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -1968,6 +2000,10 @@
         "standard": {
           "type": "boolean",
           "description": ""
+        },
+        "children": {
+          "type": "Component[]",
+          "description": "Children list"
         }
       }
     },
@@ -2172,7 +2208,12 @@
       }
     },
     "MdIcon": {
-      "properties": {}
+      "properties": {
+        "child": {
+          "type": "Component",
+          "description": "Single child"
+        }
+      }
     }
   },
   "styles": {

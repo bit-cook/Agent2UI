@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/progress/linear-progress.js';
 
 @Component({
   selector: 'catalog-md-linear-progress',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-linear-progress
@@ -15,14 +16,16 @@ import '@material/web/progress/linear-progress.js';
         [max]="resolvedMax()"
         [indeterminate]="resolvedIndeterminate()"
         [fourColor]="resolvedFourColor()"
-        [buffer]="resolvedBuffer()">
-      <ng-content></ng-content>
-    </md-linear-progress>
+        [buffer]="resolvedBuffer()"><ng-content></ng-content></md-linear-progress>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdLinearProgress extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly value = input<Primitives.NumberValue | number | null>(null);
   readonly max = input<Primitives.NumberValue | number | null>(null);
   readonly indeterminate = input<Primitives.BooleanValue | boolean | null>(null);

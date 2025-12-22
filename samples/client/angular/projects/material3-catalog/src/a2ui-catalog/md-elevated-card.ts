@@ -1,24 +1,27 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/labs/card/elevated-card.js';
 
 @Component({
   selector: 'catalog-md-elevated-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-elevated-card
-        >
-      <ng-content></ng-content>
-    </md-elevated-card>
+        ><ng-content></ng-content></md-elevated-card>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdElevatedCard extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
 
 
 

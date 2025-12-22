@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/slider/slider.js';
 
 @Component({
   selector: 'catalog-md-slider',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-slider
@@ -28,14 +29,16 @@ import '@material/web/slider/slider.js';
         [labeled]="resolvedLabeled()"
         [range]="resolvedRange()"
         [disabled]="resolvedDisabled()"
-        [name]="resolvedName()">
-      <ng-content></ng-content>
-    </md-slider>
+        [name]="resolvedName()"><ng-content></ng-content></md-slider>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdSlider extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly min = input<Primitives.NumberValue | number | null>(null);
   readonly max = input<Primitives.NumberValue | number | null>(null);
   readonly value = input<Primitives.NumberValue | number | null>(null);
@@ -77,31 +80,31 @@ export class MdSlider extends DynamicComponent {
   });
   protected resolvedValueLabel = computed(() => {
     const v = this.valueLabel();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedValueLabelStart = computed(() => {
     const v = this.valueLabelStart();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedValueLabelEnd = computed(() => {
     const v = this.valueLabelEnd();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedAriaLabelStart = computed(() => {
     const v = this.ariaLabelStart();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedAriaValueTextStart = computed(() => {
     const v = this.ariaValueTextStart();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedAriaLabelEnd = computed(() => {
     const v = this.ariaLabelEnd();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedAriaValueTextEnd = computed(() => {
     const v = this.ariaValueTextEnd();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedStep = computed(() => {
     const v = this.step();
@@ -125,6 +128,6 @@ export class MdSlider extends DynamicComponent {
   });
   protected resolvedName = computed(() => {
     const v = this.name();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

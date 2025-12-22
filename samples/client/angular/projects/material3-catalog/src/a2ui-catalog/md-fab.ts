@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/fab/fab.js';
 
 @Component({
   selector: 'catalog-md-fab',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-fab
@@ -21,13 +22,19 @@ import '@material/web/fab/fab.js';
         [primary]="resolvedPrimary()"
         [secondary]="resolvedSecondary()"
         [tertiary]="resolvedTertiary()">
-      <ng-content></ng-content>
-    </md-fab>
+      @for (child of component().properties['children']; track child) {
+        <ng-container a2ui-renderer [surfaceId]="surfaceId()!" [component]="child" />
+      }
+<ng-content></ng-content></md-fab>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdFab extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly size = input<Primitives.StringValue | string | null>(null);
   readonly label = input<Primitives.StringValue | string | null>(null);
   readonly lowered = input<Primitives.BooleanValue | boolean | null>(null);
@@ -38,14 +45,15 @@ export class MdFab extends DynamicComponent {
   readonly primary = input<Primitives.BooleanValue | boolean | null>(null);
   readonly secondary = input<Primitives.BooleanValue | boolean | null>(null);
   readonly tertiary = input<Primitives.BooleanValue | boolean | null>(null);
+  readonly children = input<any | Component[] | null>(null);
 
   protected resolvedSize = computed(() => {
     const v = this.size();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedLabel = computed(() => {
     const v = this.label();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedLowered = computed(() => {
     const v = this.lowered();
@@ -65,7 +73,7 @@ export class MdFab extends DynamicComponent {
   });
   protected resolvedVariant = computed(() => {
     const v = this.variant();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedPrimary = computed(() => {
     const v = this.primary();
@@ -78,5 +86,9 @@ export class MdFab extends DynamicComponent {
   protected resolvedTertiary = computed(() => {
     const v = this.tertiary();
     return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.BooleanValue) : (v as boolean)) ?? false;
+  });
+  protected resolvedChildren = computed(() => {
+    const v = this.children() as any[];
+    return Array.isArray(v) ? v : [];
   });
 }

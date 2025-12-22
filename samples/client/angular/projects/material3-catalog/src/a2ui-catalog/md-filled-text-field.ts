@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/textfield/filled-text-field.js';
 
 @Component({
   selector: 'catalog-md-filled-text-field',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-filled-text-field
@@ -39,14 +40,16 @@ import '@material/web/textfield/filled-text-field.js';
         [type]="resolvedType()"
         [autocomplete]="resolvedAutocomplete()"
         [disabled]="resolvedDisabled()"
-        [name]="resolvedName()">
-      <ng-content></ng-content>
-    </md-filled-text-field>
+        [name]="resolvedName()"><ng-content></ng-content></md-filled-text-field>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdFilledTextField extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly error = input<Primitives.BooleanValue | boolean | null>(null);
   readonly errorText = input<Primitives.StringValue | string | null>(null);
   readonly label = input<Primitives.StringValue | string | null>(null);
@@ -83,11 +86,11 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedErrorText = computed(() => {
     const v = this.errorText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedLabel = computed(() => {
     const v = this.label();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedNoAsterisk = computed(() => {
     const v = this.noAsterisk();
@@ -99,15 +102,15 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedValue = computed(() => {
     const v = this.value();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedPrefixText = computed(() => {
     const v = this.prefixText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedSuffixText = computed(() => {
     const v = this.suffixText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedHasLeadingIcon = computed(() => {
     const v = this.hasLeadingIcon();
@@ -119,11 +122,11 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedSupportingText = computed(() => {
     const v = this.supportingText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedTextDirection = computed(() => {
     const v = this.textDirection();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedRows = computed(() => {
     const v = this.rows();
@@ -135,11 +138,11 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedInputMode = computed(() => {
     const v = this.inputMode();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedMax = computed(() => {
     const v = this.max();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedMaxLength = computed(() => {
     const v = this.maxLength();
@@ -147,7 +150,7 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedMin = computed(() => {
     const v = this.min();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedMinLength = computed(() => {
     const v = this.minLength();
@@ -159,11 +162,11 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedPattern = computed(() => {
     const v = this.pattern();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedPlaceholder = computed(() => {
     const v = this.placeholder();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedReadOnly = computed(() => {
     const v = this.readOnly();
@@ -175,15 +178,15 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedStep = computed(() => {
     const v = this.step();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedType = computed(() => {
     const v = this.type();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedAutocomplete = computed(() => {
     const v = this.autocomplete();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedDisabled = computed(() => {
     const v = this.disabled();
@@ -191,6 +194,6 @@ export class MdFilledTextField extends DynamicComponent {
   });
   protected resolvedName = computed(() => {
     const v = this.name();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

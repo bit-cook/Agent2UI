@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/menu/menu-item.js';
 
 @Component({
   selector: 'catalog-md-menu-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-menu-item
@@ -20,14 +21,16 @@ import '@material/web/menu/menu-item.js';
         [href]="resolvedHref()"
         [target]="resolvedTarget()"
         [keepOpen]="resolvedKeepOpen()"
-        [selected]="resolvedSelected()">
-      <ng-content></ng-content>
-    </md-menu-item>
+        [selected]="resolvedSelected()"><ng-content></ng-content></md-menu-item>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdMenuItem extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly delegatesFocus = input<Primitives.BooleanValue | boolean | null>(null);
   readonly mode = input<Primitives.StringValue | string | null>(null);
   readonly serializable = input<Primitives.BooleanValue | boolean | null>(null);
@@ -45,7 +48,7 @@ export class MdMenuItem extends DynamicComponent {
   });
   protected resolvedMode = computed(() => {
     const v = this.mode();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedSerializable = computed(() => {
     const v = this.serializable();
@@ -53,7 +56,7 @@ export class MdMenuItem extends DynamicComponent {
   });
   protected resolvedSlotAssignment = computed(() => {
     const v = this.slotAssignment();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedDisabled = computed(() => {
     const v = this.disabled();
@@ -61,15 +64,15 @@ export class MdMenuItem extends DynamicComponent {
   });
   protected resolvedType = computed(() => {
     const v = this.type();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedHref = computed(() => {
     const v = this.href();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedTarget = computed(() => {
     const v = this.target();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedKeepOpen = computed(() => {
     const v = this.keepOpen();

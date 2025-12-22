@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/select/select-option.js';
 
 @Component({
   selector: 'catalog-md-select-option',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-select-option
@@ -19,14 +20,16 @@ import '@material/web/select/select-option.js';
         [isMenuItem]="resolvedIsMenuItem()"
         [selected]="resolvedSelected()"
         [value]="resolvedValue()"
-        [type]="resolvedType()">
-      <ng-content></ng-content>
-    </md-select-option>
+        [type]="resolvedType()"><ng-content></ng-content></md-select-option>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdSelectOption extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly delegatesFocus = input<Primitives.BooleanValue | boolean | null>(null);
   readonly mode = input<Primitives.StringValue | string | null>(null);
   readonly serializable = input<Primitives.BooleanValue | boolean | null>(null);
@@ -43,7 +46,7 @@ export class MdSelectOption extends DynamicComponent {
   });
   protected resolvedMode = computed(() => {
     const v = this.mode();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedSerializable = computed(() => {
     const v = this.serializable();
@@ -51,7 +54,7 @@ export class MdSelectOption extends DynamicComponent {
   });
   protected resolvedSlotAssignment = computed(() => {
     const v = this.slotAssignment();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedDisabled = computed(() => {
     const v = this.disabled();
@@ -67,10 +70,10 @@ export class MdSelectOption extends DynamicComponent {
   });
   protected resolvedValue = computed(() => {
     const v = this.value();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedType = computed(() => {
     const v = this.type();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

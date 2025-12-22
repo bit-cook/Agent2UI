@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/menu/menu.js';
 
 @Component({
   selector: 'catalog-md-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-menu
@@ -29,14 +30,16 @@ import '@material/web/menu/menu.js';
         [defaultFocus]="resolvedDefaultFocus()"
         [noNavigationWrap]="resolvedNoNavigationWrap()"
         [isSubmenu]="resolvedIsSubmenu()"
-        [typeaheadController]="resolvedTypeaheadController()">
-      <ng-content></ng-content>
-    </md-menu>
+        [typeaheadController]="resolvedTypeaheadController()"><ng-content></ng-content></md-menu>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdMenu extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly anchor = input<Primitives.StringValue | string | null>(null);
   readonly positioning = input<Primitives.StringValue | string | null>(null);
   readonly quick = input<Primitives.BooleanValue | boolean | null>(null);
@@ -59,11 +62,11 @@ export class MdMenu extends DynamicComponent {
 
   protected resolvedAnchor = computed(() => {
     const v = this.anchor();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedPositioning = computed(() => {
     const v = this.positioning();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedQuick = computed(() => {
     const v = this.quick();
@@ -99,11 +102,11 @@ export class MdMenu extends DynamicComponent {
   });
   protected resolvedAnchorCorner = computed(() => {
     const v = this.anchorCorner();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedMenuCorner = computed(() => {
     const v = this.menuCorner();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedStayOpenOnOutsideClick = computed(() => {
     const v = this.stayOpenOnOutsideClick();
@@ -119,7 +122,7 @@ export class MdMenu extends DynamicComponent {
   });
   protected resolvedDefaultFocus = computed(() => {
     const v = this.defaultFocus();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedNoNavigationWrap = computed(() => {
     const v = this.noNavigationWrap();
@@ -131,6 +134,6 @@ export class MdMenu extends DynamicComponent {
   });
   protected resolvedTypeaheadController = computed(() => {
     const v = this.typeaheadController();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

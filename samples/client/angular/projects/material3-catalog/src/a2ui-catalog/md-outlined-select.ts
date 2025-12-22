@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/select/outlined-select.js';
 
 @Component({
   selector: 'catalog-md-outlined-select',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-outlined-select
@@ -29,14 +30,16 @@ import '@material/web/select/outlined-select.js';
         [displayText]="resolvedDisplayText()"
         [menuAlign]="resolvedMenuAlign()"
         [disabled]="resolvedDisabled()"
-        [name]="resolvedName()">
-      <ng-content></ng-content>
-    </md-outlined-select>
+        [name]="resolvedName()"><ng-content></ng-content></md-outlined-select>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdOutlinedSelect extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly delegatesFocus = input<Primitives.BooleanValue | boolean | null>(null);
   readonly mode = input<Primitives.StringValue | string | null>(null);
   readonly serializable = input<Primitives.BooleanValue | boolean | null>(null);
@@ -63,7 +66,7 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedMode = computed(() => {
     const v = this.mode();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedSerializable = computed(() => {
     const v = this.serializable();
@@ -71,7 +74,7 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedSlotAssignment = computed(() => {
     const v = this.slotAssignment();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedQuick = computed(() => {
     const v = this.quick();
@@ -83,11 +86,11 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedErrorText = computed(() => {
     const v = this.errorText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedLabel = computed(() => {
     const v = this.label();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedNoAsterisk = computed(() => {
     const v = this.noAsterisk();
@@ -95,7 +98,7 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedSupportingText = computed(() => {
     const v = this.supportingText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedError = computed(() => {
     const v = this.error();
@@ -103,7 +106,7 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedMenuPositioning = computed(() => {
     const v = this.menuPositioning();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedClampMenuWidth = computed(() => {
     const v = this.clampMenuWidth();
@@ -119,11 +122,11 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedDisplayText = computed(() => {
     const v = this.displayText();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedMenuAlign = computed(() => {
     const v = this.menuAlign();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedDisabled = computed(() => {
     const v = this.disabled();
@@ -131,6 +134,6 @@ export class MdOutlinedSelect extends DynamicComponent {
   });
   protected resolvedName = computed(() => {
     const v = this.name();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

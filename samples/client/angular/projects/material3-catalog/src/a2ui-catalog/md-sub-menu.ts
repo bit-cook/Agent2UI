@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/menu/sub-menu.js';
 
 @Component({
   selector: 'catalog-md-sub-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-sub-menu
@@ -15,14 +16,16 @@ import '@material/web/menu/sub-menu.js';
         [menuCorner]="resolvedMenuCorner()"
         [hoverOpenDelay]="resolvedHoverOpenDelay()"
         [hoverCloseDelay]="resolvedHoverCloseDelay()"
-        [isSubMenu]="resolvedIsSubMenu()">
-      <ng-content></ng-content>
-    </md-sub-menu>
+        [isSubMenu]="resolvedIsSubMenu()"><ng-content></ng-content></md-sub-menu>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdSubMenu extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly anchorCorner = input<Primitives.StringValue | string | null>(null);
   readonly menuCorner = input<Primitives.StringValue | string | null>(null);
   readonly hoverOpenDelay = input<Primitives.NumberValue | number | null>(null);
@@ -31,11 +34,11 @@ export class MdSubMenu extends DynamicComponent {
 
   protected resolvedAnchorCorner = computed(() => {
     const v = this.anchorCorner();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedMenuCorner = computed(() => {
     const v = this.menuCorner();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedHoverOpenDelay = computed(() => {
     const v = this.hoverOpenDelay();

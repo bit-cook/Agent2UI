@@ -19,6 +19,21 @@ CATALOG_DIR = os.path.join(SRC_DIR, 'a2ui-catalog')
 CATALOG_TS_PATH = os.path.join(CATALOG_DIR, 'catalog.ts')
 LIBRARY_JSON_PATH = os.path.join(SRC_DIR, 'app/features/library/components.json')
 
+CONTENT_COMPONENTS = {
+    "MdFilledButton": "children",
+    "MdOutlinedButton": "children",
+    "MdElevatedButton": "children",
+    "MdTextButton": "children",
+    "MdTonalButton": "children",
+    "MdFab": "children",
+    "MdChip": "children",
+    "MdIcon": "child",
+    "MdIconButton": "children",
+    "MdFilledIconButton": "children",
+    "MdFilledTonalIconButton": "children",
+    "MdOutlinedIconButton": "children"
+}
+
 BLACKLIST = {
     "MdFilledField",
     "MdOutlinedField",
@@ -679,7 +694,11 @@ def generate_implementation(cls: ClassDef, final_props: Dict[str, PropertyDef], 
         if ts_type == "boolean": primitive_type = "BooleanValue"
         elif ts_type == "number": primitive_type = "NumberValue"
         
-        input_defs.append(f"  readonly {pname} = input<Primitives.{primitive_type} | {ts_type} | null>(null);")
+        input_type = f"Primitives.{primitive_type} | {ts_type} | null"
+        if ts_type == "Component" or ts_type == "Component[]":
+            input_type = f"any | {ts_type} | null" # Accept any for component structures
+
+        input_defs.append(f"  readonly {pname} = input<{input_type}>(null);")
         
         resolve_cast = f"v as Primitives.{primitive_type}"
         default_val = "''"
@@ -690,36 +709,84 @@ def generate_implementation(cls: ClassDef, final_props: Dict[str, PropertyDef], 
 
         cap_name = pname[0].upper() + pname[1:]
             
-        computed_defs.append(f"""  protected resolved{cap_name} = computed(() => {{
+        safe_resolve = f"(v as {ts_type})"
+        if ts_type == "string":
+            safe_resolve = f"(typeof v === 'string' ? v : {default_val})"
+
+        if ts_type == "Component":
+            computed_defs.append(f"""  protected resolved{cap_name} = computed(() => {{
+    const v = this.{pname}() as any;
+    if (v && v.type === 'Text') {{
+        return v.properties?.text ?? '';
+    }}
+    return '';
+  }});""")
+        elif ts_type == "Component[]":
+            # For children, we now use a2ui-renderer in the template, so resolvedChildren isn't needed for projection
+            # But we might need it if we wanted to manipulate it? 
+            # Actually, the template uses component().properties['children'] directly.
+            # So lets just return the raw array or empty array if we need a handle, 
+            # OR we can remove resolvedChildren entirely if not used. 
+            # But generate_implementation iterates ALL props to create bindings/computeds.
+            # If we don't use it in template, we can just return it safe-resolved.
+            computed_defs.append(f"""  protected resolved{cap_name} = computed(() => {{
+    const v = this.{pname}() as any[];
+    return Array.isArray(v) ? v : [];
+  }});""")
+        else:
+            computed_defs.append(f"""  protected resolved{cap_name} = computed(() => {{
     const v = this.{pname}();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive({resolve_cast}) : (v as {ts_type})) ?? {default_val};
+    return ((v && typeof v === 'object') ? this.resolvePrimitive({resolve_cast}) : {safe_resolve}) ?? {default_val};
   }});""")
         
-        template_bindings.append(f"[{pname}]=\"resolved{cap_name}()\"")
+        if pname != "child" and pname != "children":
+            template_bindings.append(f"[{pname}]=\"resolved{cap_name}()\"")
 
     binding_str = "\n        ".join(template_bindings)
     
+    content_injection = ""
+    # Inject based on configured content type
+    if cls.name in CONTENT_COMPONENTS:
+        ctype = CONTENT_COMPONENTS[cls.name]
+        if ctype == "child":
+            # Use Renderer for single child projection
+            content_injection = """<ng-container
+        a2ui-renderer
+        [surfaceId]="surfaceId()!"
+        [component]="component().properties['child']"
+      />"""
+        elif ctype == "children":
+            # Use Renderer for component projection
+            content_injection = """
+      @for (child of component().properties['children']; track child) {
+        <ng-container a2ui-renderer [surfaceId]="surfaceId()!" [component]="child" />
+      }
+"""
+    
     content = f"""import {{ Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA }} from '@angular/core';
 import {{ CommonModule }} from '@angular/common';
-import {{ DynamicComponent }} from '@a2ui/angular';
+import {{ DomSanitizer, SafeHtml }} from '@angular/platform-browser';
+import {{ DynamicComponent, Renderer }} from '@a2ui/angular';
 import {{ Primitives }} from '@a2ui/lit/0.8';
 import '{import_path}';
 
 @Component({{
   selector: 'catalog-{kebab_name}',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <{cls.tag_name}
-        {binding_str}>
-      <ng-content></ng-content>
-    </{cls.tag_name}>
+        {binding_str}>{content_injection}<ng-content></ng-content></{cls.tag_name}>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 }})
 export class {cls.name} extends DynamicComponent {{
+  constructor(protected sanitizer: DomSanitizer) {{
+    super();
+  }}
+
 {chr(10).join(input_defs)}
 
 {chr(10).join(computed_defs)}
@@ -879,6 +946,7 @@ def convert_node_to_json(node, tag_to_class, component_list):
     
     comp_type = "Text"
     props = {}
+    child_ids = []
     
     if tag.startswith('md-'):
         if tag in tag_to_class:
@@ -893,8 +961,23 @@ def convert_node_to_json(node, tag_to_class, component_list):
             
             text = node.get('text', '')
             if text:
-                if tag == 'md-icon':
-                    props['fontIcon'] = {"literalString": text}
+                # If component expects content, we should create a Text child
+                if comp_type in CONTENT_COMPONENTS:
+                    ctype = CONTENT_COMPONENTS[comp_type]
+                    text_id = f"text-{id(node)}-{len(child_ids)}"
+                    
+                    component_list.append({
+                        "id": text_id,
+                        "component": {
+                             "Text": { "text": { "literalString": text } }
+                        }
+                    })
+                    
+                    if ctype == "child":
+                        props['child'] = text_id
+                    elif ctype == "children":
+                        child_ids.append(text_id)
+
                 elif 'label' in ['label', 'text', 'value']: 
                     props['label'] = {"literalString": text}
                     
@@ -909,14 +992,14 @@ def convert_node_to_json(node, tag_to_class, component_list):
             return None
 
     # Process children
-    child_ids = []
+    # child_ids initialized at top
     
     for child in node['children']:
         c_id = convert_node_to_json(child, tag_to_class, component_list)
         if c_id:
             child_ids.append(c_id)
             
-    if child_ids and comp_type not in ["Text", "MdIcon"]:
+    if child_ids and comp_type not in ["Text"]:
         props['children'] = child_ids
         
     # Generate ID
@@ -1182,6 +1265,16 @@ def main():
 
     for cls in component_classes:
         final_props = get_all_properties(cls.name, set())
+        
+        if cls.name in CONTENT_COMPONENTS:
+            ctype = CONTENT_COMPONENTS[cls.name]
+            if ctype == "child":
+                 if 'child' not in final_props:
+                     final_props['child'] = PropertyDef("child", "Component", "Single child")
+            elif ctype == "children":
+                 if 'children' not in final_props:
+                     final_props['children'] = PropertyDef("children", "Component[]", "Children list")
+
         props_json = {}
         for p_name, p_def in final_props.items():
             if p_name.startswith('_'): continue

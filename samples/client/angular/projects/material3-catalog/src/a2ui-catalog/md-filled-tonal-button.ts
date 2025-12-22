@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/button/filled-tonal-button.js';
 
 @Component({
   selector: 'catalog-md-filled-tonal-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-filled-tonal-button
@@ -19,14 +20,16 @@ import '@material/web/button/filled-tonal-button.js';
         [trailingIcon]="resolvedTrailingIcon()"
         [hasIcon]="resolvedHasIcon()"
         [type]="resolvedType()"
-        [value]="resolvedValue()">
-      <ng-content></ng-content>
-    </md-filled-tonal-button>
+        [value]="resolvedValue()"><ng-content></ng-content></md-filled-tonal-button>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdFilledTonalButton extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly disabled = input<Primitives.BooleanValue | boolean | null>(null);
   readonly softDisabled = input<Primitives.BooleanValue | boolean | null>(null);
   readonly href = input<Primitives.StringValue | string | null>(null);
@@ -47,15 +50,15 @@ export class MdFilledTonalButton extends DynamicComponent {
   });
   protected resolvedHref = computed(() => {
     const v = this.href();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedDownload = computed(() => {
     const v = this.download();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedTarget = computed(() => {
     const v = this.target();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedTrailingIcon = computed(() => {
     const v = this.trailingIcon();
@@ -67,10 +70,10 @@ export class MdFilledTonalButton extends DynamicComponent {
   });
   protected resolvedType = computed(() => {
     const v = this.type();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedValue = computed(() => {
     const v = this.value();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
 }

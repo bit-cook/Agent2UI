@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/tabs/primary-tab.js';
 
 @Component({
   selector: 'catalog-md-primary-tab',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-primary-tab
@@ -15,14 +16,16 @@ import '@material/web/tabs/primary-tab.js';
         [hasIcon]="resolvedHasIcon()"
         [iconOnly]="resolvedIconOnly()"
         [inlineIcon]="resolvedInlineIcon()"
-        [stacked]="resolvedStacked()">
-      <ng-content></ng-content>
-    </md-primary-tab>
+        [stacked]="resolvedStacked()"><ng-content></ng-content></md-primary-tab>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdPrimaryTab extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly active = input<Primitives.BooleanValue | boolean | null>(null);
   readonly hasIcon = input<Primitives.BooleanValue | boolean | null>(null);
   readonly iconOnly = input<Primitives.BooleanValue | boolean | null>(null);

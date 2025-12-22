@@ -1,13 +1,14 @@
 import { Component, computed, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicComponent } from '@a2ui/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DynamicComponent, Renderer } from '@a2ui/angular';
 import { Primitives } from '@a2ui/lit/0.8';
 import '@material/web/labs/segmentedbutton/outlined-segmented-button.js';
 
 @Component({
   selector: 'catalog-md-outlined-segmented-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Renderer],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-outlined-segmented-button
@@ -15,14 +16,16 @@ import '@material/web/labs/segmentedbutton/outlined-segmented-button.js';
         [selected]="resolvedSelected()"
         [label]="resolvedLabel()"
         [noCheckmark]="resolvedNoCheckmark()"
-        [hasIcon]="resolvedHasIcon()">
-      <ng-content></ng-content>
-    </md-outlined-segmented-button>
+        [hasIcon]="resolvedHasIcon()"><ng-content></ng-content></md-outlined-segmented-button>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdOutlinedSegmentedButton extends DynamicComponent {
+  constructor(protected sanitizer: DomSanitizer) {
+    super();
+  }
+
   readonly disabled = input<Primitives.BooleanValue | boolean | null>(null);
   readonly selected = input<Primitives.BooleanValue | boolean | null>(null);
   readonly label = input<Primitives.StringValue | string | null>(null);
@@ -39,7 +42,7 @@ export class MdOutlinedSegmentedButton extends DynamicComponent {
   });
   protected resolvedLabel = computed(() => {
     const v = this.label();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (typeof v === 'string' ? v : '')) ?? '';
   });
   protected resolvedNoCheckmark = computed(() => {
     const v = this.noCheckmark();
