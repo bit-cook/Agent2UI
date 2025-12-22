@@ -16,8 +16,7 @@ import '@material/web/labs/navigationtab/navigation-tab.js';
         [hideInactiveLabel]="resolvedHideInactiveLabel()"
         [label]="resolvedLabel()"
         [badgeValue]="resolvedBadgeValue()"
-        [showBadge]="resolvedShowBadge()"
-        [buttonElement]="resolvedButtonElement()">
+        [showBadge]="resolvedShowBadge()">
       <ng-content></ng-content>
     </md-navigation-tab>
   `,
@@ -31,7 +30,6 @@ export class MdNavigationTab extends DynamicComponent {
   readonly label = input<Primitives.StringValue | string | null>(null);
   readonly badgeValue = input<Primitives.StringValue | string | null>(null);
   readonly showBadge = input<Primitives.BooleanValue | boolean | null>(null);
-  readonly buttonElement = input<Primitives.StringValue | string | null>(null);
 
   protected resolvedDisabled = computed(() => {
     const v = this.disabled();
@@ -56,9 +54,5 @@ export class MdNavigationTab extends DynamicComponent {
   protected resolvedShowBadge = computed(() => {
     const v = this.showBadge();
     return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.BooleanValue) : (v as boolean)) ?? false;
-  });
-  protected resolvedButtonElement = computed(() => {
-    const v = this.buttonElement();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
   });
 }

@@ -11,8 +11,7 @@ import '@material/web/labs/segmentedbuttonset/outlined-segmented-button-set.js';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <md-outlined-segmented-button-set
-        [multiselect]="resolvedMultiselect()"
-        [buttons]="resolvedButtons()">
+        [multiselect]="resolvedMultiselect()">
       <ng-content></ng-content>
     </md-outlined-segmented-button-set>
   `,
@@ -21,14 +20,9 @@ import '@material/web/labs/segmentedbuttonset/outlined-segmented-button-set.js';
 })
 export class MdOutlinedSegmentedButtonSet extends DynamicComponent {
   readonly multiselect = input<Primitives.BooleanValue | boolean | null>(null);
-  readonly buttons = input<Primitives.StringValue | string | null>(null);
 
   protected resolvedMultiselect = computed(() => {
     const v = this.multiselect();
     return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.BooleanValue) : (v as boolean)) ?? false;
-  });
-  protected resolvedButtons = computed(() => {
-    const v = this.buttons();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
   });
 }

@@ -3,6 +3,7 @@ import re
 import os
 import glob
 from typing import Dict, Any, Optional, List
+from html.parser import HTMLParser
 
 # Paths
 BASE_DIR = '/Users/wrenj/a2ui/a2ui2/A2UI/samples/client/angular'
@@ -12,6 +13,7 @@ SPEC_DIR = os.path.join(PROJECT_DIR, 'spec')
 SRC_DIR = os.path.join(PROJECT_DIR, 'src')
 
 THEMING_MD_PATH = os.path.join(SPEC_DIR, 'all_theming.md')
+COMPONENTS_MD_PATH = os.path.join(SPEC_DIR, 'all_components.md')
 OUTPUT_JSON_PATH = os.path.join(SPEC_DIR, 'material3_catalog_definition.json')
 CATALOG_DIR = os.path.join(SRC_DIR, 'a2ui-catalog')
 CATALOG_TS_PATH = os.path.join(CATALOG_DIR, 'catalog.ts')
@@ -24,6 +26,24 @@ BLACKLIST = {
     "MdItem",
     "MdElevation",
     "MdNavigationDrawerModal",
+}
+
+PROPERTY_BLACKLIST = {
+    "buttons",
+    "buttonElement",
+    "form",
+    "labels",
+    "validity",
+    "validationMessage",
+    "willValidate",
+    "renderRoot",
+    "isConnected",
+    "assignedSlot",
+    "submitter", 
+    "valueAsDate",
+    "valueAsNumber",
+    "tabs",
+    "items",
 }
 
 # Standard components - Metadata for Catalog Definition
@@ -139,6 +159,10 @@ def to_kebab_case(name: str) -> str:
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1-\2', s1).lower()
 
+def to_camel_case(snake_str):
+    components = snake_str.split('-')
+    return components[0] + ''.join(x.title() for x in components[1:])
+
 def extract_jsdoc_description(content: str, start_index: int) -> str:
     lookback = content[max(0, start_index - 500):start_index]
     match = re.search(r'/\*\*((?:(?!\*/).)*?)\*/\s*$', lookback, re.DOTALL)
@@ -173,7 +197,6 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
     if not class_indices:
         return []
         
-    # 1. CustomElement decorators
     ce_matches = re.finditer(r"@customElement\('([^']+)'\)", content)
     for m in ce_matches:
         tag = m.group(1)
@@ -187,11 +210,9 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
         if best_cls:
             best_cls.tag_name = tag
             
-    # 2. HTMLElementTagNameMap (d.ts)
     tag_map_match = re.search(r'interface\s+HTMLElementTagNameMap\s*{([^}]+)}', content, re.DOTALL)
     if tag_map_match:
         block = tag_map_match.group(1)
-        # Parse 'tag': ClassName;
         for map_m in re.finditer(r"'([^']+)':\s*(\w+)", block):
             tag = map_m.group(1)
             cls_name = map_m.group(2)
@@ -199,8 +220,6 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
                 if c['name'] == cls_name:
                     c['obj'].tag_name = tag
 
-    # Scan for properties
-    # A. Decorators (Source files)
     prop_regex = re.compile(r'@property\s*\((.*?)\)\s*(?:readonly\s+)?([a-zA-Z0-9_]+)')
     for m in prop_regex.finditer(content):
         prop_args = m.group(1)
@@ -221,6 +240,7 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
                     best_cls = c['obj']
         
         if best_cls:
+            if prop_name in PROPERTY_BLACKLIST: continue
             best_cls.properties[prop_name] = PropertyDef(prop_name, prop_type, prop_desc)
 
     # B. D.TS properties
@@ -228,6 +248,8 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
     
     for m in dts_prop_regex.finditer(content):
         prop_name = m.group(1)
+        if prop_name in PROPERTY_BLACKLIST: continue
+        
         prop_type_raw = m.group(3).strip()
         prop_desc = extract_jsdoc_description(content, m.start())
         
@@ -237,7 +259,12 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
         elif "number" in prop_type_raw:
             prop_type = "number"
             
-        # Assign to best class
+        # Hardcoded overrides for known issues
+        if prop_name == "hideInactiveLabels":
+            prop_type = "boolean"
+        if prop_name == "activeIndex":
+             prop_type = "number"
+            
         best_cls = None
         max_start = -1
         for c in class_indices:
@@ -246,7 +273,6 @@ def parse_ts_file(filepath: str) -> List[ClassDef]:
                     max_start = c['start']
                     best_cls = c['obj']
         
-        # Skip methods
         if '=>' in prop_type_raw or '(' in prop_type_raw:
             continue
             
@@ -360,7 +386,9 @@ def generate_implementation(cls: ClassDef, final_props: Dict[str, PropertyDef], 
         default_val = "''"
         if ts_type == "boolean": default_val = "false"
         elif ts_type == "number": default_val = "0"
-        
+            
+        if pname == "activeIndex": default_val = "undefined"
+
         cap_name = pname[0].upper() + pname[1:]
             
         computed_defs.append(f"""  protected resolved{cap_name} = computed(() => {{
@@ -430,109 +458,305 @@ export const MATERIAL3_CATALOG = {{
     with open(output_path, 'w') as f:
         f.write(content)
 
-def generate_library_json(components: List[tuple], output_path: str):
-    # This generates the JSON file for the demo library
-    blocks = []
+class ExampleParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.roots = []
+        self.stack = []
+        self.current_text = []
 
-    # Standard Components
-    standard_blocks = [
-        {
-            "name": "Card",
-            "tag": "Layout",
-            "type": "Card",
-            "properties": {
-                "child": { "id": "card-text", "type": "Text", "properties": { "text": { "literalString": "Content inside a card" } } }
-            }
-        },
-        {
-            "name": "Column",
-            "tag": "Layout",
-            "type": "Column",
-            "properties": {
-                "alignment": "center",
-                "children": {
-                    "explicitList": ["col-1", "col-2"]
-                }
-            },
-            "children_definitions": [
-                { "id": "col-1", "type": "Text", "properties": { "text": { "literalString": "Item 1" } } },
-                { "id": "col-2", "type": "Text", "properties": { "text": { "literalString": "Item 2" } } }
-            ]
-        },
-        {
-            "name": "Row",
-            "tag": "Layout",
-            "type": "Row",
-            "properties": {
-                "alignment": "center",
-                "distribution": "space-around",
-                "children": {
-                    "explicitList": ["row-1", "row-2"]
-                }
-            },
-            "children_definitions": [
-                { "id": "row-1", "type": "Text", "properties": { "text": { "literalString": "Left" } } },
-                { "id": "row-2", "type": "Text", "properties": { "text": { "literalString": "Right" } } }
-            ]
-        },
-        {
-             "name": "Text",
-             "tag": "Layout",
-             "type": "Text",
-             "properties": { "text": { "literalString": "Standard Text" } }
-        },
-        {
-            "name": "Divider",
-            "tag": "Layout",
-            "type": "Column",
-            "properties": { "children": { "explicitList": ["div-1", "div-2", "div-3"] } },
-            "children_definitions": [
-                { "id": "div-1", "type": "Text", "properties": { "text": { "literalString": "Above" } } },
-                { "id": "div-2", "type": "Divider", "properties": {} },
-                { "id": "div-3", "type": "Text", "properties": { "text": { "literalString": "Below" } } }
-            ]
-        },
-        # Adding a few more standard demos to match previous coverage
-        {
-            "name": "Image",
-            "tag": "Media",
-            "type": "Image",
-            "properties": { "url": { "literalString": "https://picsum.photos/id/10/300/200" } }
-        },
-        {
-             "name": "Button",
-             "tag": "Inputs",
-             "type": "Button",
-             "properties": {
-                 "label": { "literalString": "Click Me" },
-                 "action": { "type": "click" },
-                 "child": { "id": "btn-text", "type": "Text", "properties": { "text": { "literalString": "Click Me" } } }
-             }
+    def handle_starttag(self, tag, attrs):
+        node = {
+            "tag": tag,
+            "attrs": dict(attrs),
+            "children": [],
+            "text": ""
         }
-    ]
-    
-    blocks.extend(standard_blocks)
-    
-    # Material Components
-    for cls_name, _, props in components:
-        demo_props = {}
-        for pname, pdef in props.items():
-            if pname.startswith('_'): continue
-            if "label" in pname.lower():
-                demo_props[pname] = {"literalString": cls_name}
-            elif pdef.type_str == "boolean":
-                demo_props[pname] = {"literalBoolean": False}
-            elif pdef.type_str == "number":
-                demo_props[pname] = {"literalNumber": 0}
-            elif pdef.type_str == "string":
-                 demo_props[pname] = {"literalString": "value"}
+        if self.stack:
+            self.stack[-1]["children"].append(node)
+        else:
+            self.roots.append(node)
+        self.stack.append(node)
 
-        blocks.append({
-            "name": cls_name,
-            "tag": "Material",
-            "type": cls_name,
-            "properties": demo_props
-        })
+    def handle_endtag(self, tag):
+        if self.stack and self.stack[-1]["tag"] == tag:
+            self.stack[-1]["text"] = "".join(self.current_text).strip()
+            self.current_text = []
+            self.stack.pop()
+
+    def handle_data(self, data):
+        if self.stack:
+            self.current_text.append(data)
+
+def extract_examples_from_md(filepath: str) -> Dict[str, List[Dict]]:
+    with open(filepath, 'r') as f:
+        content = f.read()
+
+    examples = {}
+    
+    # 1. Split by Component Section? The MD file has headers like '# Button'.
+    # We can assume examples belong to the last seen header.
+    # OR simpler: check tags in html and associate with components?
+    # Mixing: The file is big.
+    # The structure:
+    # # Header
+    # ...
+    # ```html
+    # <tag>...</tag>
+    # ```
+    # ...
+    
+    # Let's iterate lines.
+    
+    lines = content.split('\n')
+    current_component = None
+    in_code_block = False
+    code_block_lines = []
+    
+    # Map tag-name to ComponentName to associate examples
+    # We'll do this association later, for now just collect valid HTML blocks.
+    html_blocks = []
+    
+    for line in lines:
+        if line.strip().startswith('```html'):
+            in_code_block = True
+            code_block_lines = []
+            continue
+        if line.strip().startswith('```') and in_code_block:
+            in_code_block = False
+            html_blocks.append("\n".join(code_block_lines))
+            continue
+            
+        if in_code_block:
+            code_block_lines.append(line)
+            
+    # Now parse all blocks
+    valid_examples = []
+    dropped_count = 0
+    
+    for block in html_blocks:
+        # Check blacklist
+        if '<script' in block or '<style' in block or '<svg' in block:
+            dropped_count += 1
+            print(f"Dropping example due to script/style/svg: {block[:50]}...")
+            continue
+            
+        parser = ExampleParser()
+        parser.feed(block)
+        
+        # each root in this block is a potential example
+        if parser.roots:
+            valid_examples.append(parser.roots)
+
+    print(f"Extracted {len(valid_examples)} valid example blocks. Dropped {dropped_count}.")
+    return valid_examples
+
+def convert_node_to_json(node, tag_to_class):
+    tag = node['tag']
+    
+    # Resolve Class Name
+    # Default to Text if unknown? Or ignore?
+    # If tag starts with md-, try to find class.
+    # If standard HTML, map to Text? or Column?
+    
+    comp_type = "Text"
+    props = {}
+    
+    if tag.startswith('md-'):
+        # Map md-filled-button -> MdFilledButton
+        # We need the exact class name from our previous scan.
+        # tag_to_class map needed.
+        if tag in tag_to_class:
+            comp_type = tag_to_class[tag]
+            
+            # Attributes to properties
+            # kebab-case attr -> camelCase prop
+            for k, v in node['attrs'].items():
+                if k == 'class' or k.startswith('data-'): continue
+                prop_name = to_camel_case(k)
+                # Value determination
+                if v is None: # Boolean attribute presence
+                    props[prop_name] = {"literalBoolean": True}
+                else:
+                    props[prop_name] = {"literalString": v}
+            
+            # Text Content -> label if available?
+            text = node.get('text', '')
+            if text:
+                # If component has 'label' property, set it?
+                # or 'text'?
+                # For safety, let's assume 'label' for most Md stuff, or 'text' for Textfield.
+                # MdCheckbox, MdButton -> label
+                # MdIcon -> fontIcon? No, usage is <md-icon>name</md-icon> usually.
+                if tag == 'md-icon':
+                    props['fontIcon'] = {"literalString": text}
+                elif 'label' in ['label', 'text', 'value']: # heuristic
+                    # We might overwrite attribute?
+                    props['label'] = {"literalString": text}
+                    
+    elif tag == 'div':
+        comp_type = "Column"
+        # Map children
+        
+    else:
+        # Unknown tag, maybe just text?
+        # If it has text content, make it a Text component
+        if node['text'].strip():
+             comp_type = "Text"
+             props['text'] = {"literalString": node['text']}
+        else:
+            return None # Skip empty unknown tags
+
+    # Children
+    children_defs = []
+    
+    for child in node['children']:
+        c_json = convert_node_to_json(child, tag_to_class)
+        if c_json:
+            children_defs.append(c_json)
+            
+    # If standard container (Column/Row/div), attributes imply layout? 
+    # Ignore for now.
+    
+    result = {
+        "type": comp_type,
+        "properties": props
+    }
+    
+    if children_defs and comp_type not in ["Text", "MdIcon"]:
+        # Assign explicitList
+        ids = []
+        defs = []
+        for i, child in enumerate(children_defs):
+            cid = f"child-{i}-{id(child)}"
+            ids.append(cid)
+            child['id'] = cid
+            defs.append(child)
+            
+        # Use simple list for children to match Angular component expectation
+        result['properties']['children'] = ids
+        result['children_definitions'] = defs
+        
+    return result
+
+def generate_library_json(components: List[tuple], examples_raw: List[List[Dict]], output_path: str):
+    # Map tag -> ClassName
+    tag_to_class = {}
+    class_to_tag = {}
+    
+    # standard
+    for k in STANDARD_COMPONENTS:
+        tag_to_class[k.lower()] = k
+        class_to_tag[k] = k.lower()
+        
+    # material
+    for cls_name, _, _ in components:
+        # derive tag?
+        # We need the original tag from ClassDef.
+        # But here we just have cls_name.
+        # We can re-derive kebab.
+        kebab = to_kebab_case(cls_name)
+        if not kebab.startswith('md-'): kebab = f"md-{kebab}"
+        tag_to_class[kebab] = cls_name
+        class_to_tag[cls_name] = kebab
+
+    # Group examples by component type
+    component_examples = {cls_name: [] for cls_name, _, _ in components}
+    
+    for root_nodes in examples_raw:
+        # A block might create multiple components.
+        # We need to assign them to a "primary" component if possible?
+        # The prompt says: "If there are multiple examples for a certain component, 
+        # implement all of them in the single entry for that component."
+        # This implies we should find WHICH component this example belongs to.
+        # Usually checking the root tag is enough.
+        
+        # Since examples are just lists of nodes, we can try to associate each node with its type.
+        
+        for node in root_nodes:
+            tag = node['tag']
+            if tag in tag_to_class:
+                cls = tag_to_class[tag]
+                json_node = convert_node_to_json(node, tag_to_class)
+                if json_node and cls in component_examples:
+                    component_examples[cls].append(json_node)
+    
+    # Build final blocks
+    blocks = []
+    
+    # Standard Components (simplified set)
+    # ... (Keep previous standard blocks or just minimal)
+    
+    # Material Components with Examples
+    for cls_name, _, props in components:
+        examples = component_examples.get(cls_name, [])
+        
+        if not examples:
+            # Fallback to default generated property demo
+            demo_props = {}
+            for pname, pdef in props.items():
+                if pname.startswith('_'): continue
+                
+                # Priority: Check type first!
+                if pdef.type_str == "boolean":
+                    demo_props[pname] = {"literalBoolean": False}
+                elif pdef.type_str == "number":
+                    demo_props[pname] = {"literalNumber": 0}
+                elif "label" in pname.lower():
+                    demo_props[pname] = {"literalString": cls_name}
+                elif pdef.type_str == "string":
+                     demo_props[pname] = {"literalString": "value"}
+            
+            # Special case for MdNavigationBar to avoid crash
+            children_defs = []
+            if cls_name == "MdNavigationBar":
+                demo_props["activeIndex"] = {"literalNumber": -1}
+                demo_props["children"] = ["nav-tab-1", "nav-tab-2"]
+                children_defs = [
+                    {
+                        "type": "MdNavigationTab",
+                        "id": "nav-tab-1",
+                        "properties": {"label": {"literalString": "Tab 1"}}
+                    },
+                    {
+                        "type": "MdNavigationTab", 
+                        "id": "nav-tab-2",
+                        "properties": {"label": {"literalString": "Tab 2"}}
+                    }
+                ]
+
+            block = {
+                "name": cls_name,
+                "tag": "Material",
+                "type": cls_name,
+                "properties": demo_props
+            }
+            if children_defs:
+                block["children_definitions"] = children_defs
+            
+            blocks.append(block)
+        else:
+            # Render all examples in a Column
+            # We must wrap them
+            child_ids = []
+            child_defs = []
+            
+            for i, ex in enumerate(examples):
+                cid = f"ex-{cls_name}-{i}"
+                ex['id'] = cid
+                child_ids.append(cid)
+                child_defs.append(ex)
+                
+            blocks.append({
+                "name": cls_name,
+                "tag": "Material",
+                "type": "Column",
+                "properties": {
+                    "alignment": "center",
+                    "children": child_ids
+                },
+                "children_definitions": child_defs
+            })
 
     with open(output_path, 'w') as f:
         json.dump(blocks, f, indent=2)
@@ -550,8 +774,6 @@ def main():
         parsed_classes = parse_ts_file(fpath)
         for c in parsed_classes:
             all_classes[c.name] = c
-
-    print(f"Found {len(all_classes)} classes.")
 
     def get_all_properties(class_name: str, visited: set) -> Dict[str, PropertyDef]:
         if class_name in visited: return {}
@@ -574,8 +796,6 @@ def main():
 
     for cls in component_classes:
         final_props = get_all_properties(cls.name, set())
-        
-        # JSON Schema
         props_json = {}
         for p_name, p_def in final_props.items():
             if p_name.startswith('_'): continue
@@ -583,21 +803,21 @@ def main():
                 "type": p_def.type_str,
                 "description": p_def.description
             }
-            
         components_json[cls.name] = {
             "type": "object",
             "properties": props_json
         }
-        
-        # Generate Implementation
         filename, kebab = generate_implementation(cls, final_props, CATALOG_DIR)
         valid_components_for_implementation.append((cls.name, filename, final_props))
 
     print("Generating catalog.ts...")
     generate_catalog_ts(valid_components_for_implementation, CATALOG_TS_PATH)
     
+    print("Parsing examples from Markdown...")
+    examples = extract_examples_from_md(COMPONENTS_MD_PATH)
+    
     print("Generating components.json...")
-    generate_library_json(valid_components_for_implementation, LIBRARY_JSON_PATH)
+    generate_library_json(valid_components_for_implementation, examples, LIBRARY_JSON_PATH)
 
     print("Parsing Styles...")
     styles = parse_styles(THEMING_MD_PATH)

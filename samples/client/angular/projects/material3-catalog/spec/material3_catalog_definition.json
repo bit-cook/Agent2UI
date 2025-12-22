@@ -371,10 +371,6 @@
         "hideInactiveLabels": {
           "type": "boolean",
           "description": ""
-        },
-        "tabs": {
-          "type": "string",
-          "description": ""
         }
       }
     },
@@ -383,10 +379,6 @@
       "properties": {
         "multiselect": {
           "type": "boolean",
-          "description": ""
-        },
-        "buttons": {
-          "type": "string",
           "description": ""
         }
       }
@@ -441,10 +433,6 @@
         },
         "showBadge": {
           "type": "boolean",
-          "description": ""
-        },
-        "buttonElement": {
-          "type": "string",
           "description": ""
         }
       }

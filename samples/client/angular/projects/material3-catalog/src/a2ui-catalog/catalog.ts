@@ -57,14 +57,12 @@ export const MATERIAL3_CATALOG = {
     bindings: ({ properties }) => [
       inputBinding('activeIndex', () => ('activeIndex' in properties && properties['activeIndex']) ?? undefined),
       inputBinding('hideInactiveLabels', () => ('hideInactiveLabels' in properties && properties['hideInactiveLabels']) ?? undefined),
-      inputBinding('tabs', () => ('tabs' in properties && properties['tabs']) ?? undefined),
     ],
   },
   MdOutlinedSegmentedButtonSet: {
     type: () => import('./md-outlined-segmented-button-set').then(c => c.MdOutlinedSegmentedButtonSet),
     bindings: ({ properties }) => [
       inputBinding('multiselect', () => ('multiselect' in properties && properties['multiselect']) ?? undefined),
-      inputBinding('buttons', () => ('buttons' in properties && properties['buttons']) ?? undefined),
     ],
   },
   MdOutlinedSegmentedButton: {
@@ -86,7 +84,6 @@ export const MATERIAL3_CATALOG = {
       inputBinding('label', () => ('label' in properties && properties['label']) ?? undefined),
       inputBinding('badgeValue', () => ('badgeValue' in properties && properties['badgeValue']) ?? undefined),
       inputBinding('showBadge', () => ('showBadge' in properties && properties['showBadge']) ?? undefined),
-      inputBinding('buttonElement', () => ('buttonElement' in properties && properties['buttonElement']) ?? undefined),
     ],
   },
   MdBadge: {

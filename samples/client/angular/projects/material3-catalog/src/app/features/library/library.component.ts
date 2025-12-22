@@ -96,31 +96,74 @@ export class LibraryComponent {
 
   private createSurfaceFromData(data: any): v0_8.Types.Surface {
     const rootId = 'root';
-    const componentMap = new Map<string, any>();
 
-    // If there are additional children definitions (for nested structures like Row/Column), load them
+    // 1. Build a lookup map of all available child definitions
+    const definitionsMap = new Map<string, any>();
     if (data.children_definitions) {
-      for (const child of data.children_definitions) {
-        // Ensure ID exists
-        const childId = child.id || ('generated-' + Math.random().toString(36).substr(2, 9));
-        componentMap.set(childId, {
-          id: childId,
-          type: child.type,
-          properties: child.properties || {}
-        });
-      }
+      this.collectDefinitions(data.children_definitions, definitionsMap);
     }
+
+    // 2. Create the root object
+    const rootComponent = {
+      id: rootId,
+      type: data.type,
+      properties: JSON.parse(JSON.stringify(data.properties || {})), // Deep clone to avoid mutation issues
+    };
+
+    // 3. Recursively resolve children references
+    this.resolveChildren(rootComponent, definitionsMap);
 
     return {
       rootComponentId: rootId,
       dataModel: new Map(),
       styles: {},
-      componentTree: {
-        id: rootId,
-        type: data.type,
-        properties: data.properties,
-      } as any,
-      components: componentMap,
-    };
+      componentTree: rootComponent as any,
+      components: {},
+    } as any;
+  }
+
+  private collectDefinitions(definitions: any[], map: Map<string, any>) {
+    for (const def of definitions) {
+      if (def.id) {
+        map.set(def.id, def);
+      }
+      if (def.children_definitions) {
+        this.collectDefinitions(def.children_definitions, map);
+      }
+    }
+  }
+
+  private resolveChildren(component: any, map: Map<string, any>) {
+    if (!component.properties) return;
+
+    // Check for "children" property
+    if (component.properties.children && Array.isArray(component.properties.children)) {
+      const resolvedChildren: any[] = [];
+
+      for (const item of component.properties.children) {
+        if (typeof item === 'string') {
+          // It's an ID, look it up
+          const childDef = map.get(item);
+          if (childDef) {
+            const childComponent = {
+              id: childDef.id,
+              type: childDef.type,
+              properties: JSON.parse(JSON.stringify(childDef.properties || {})),
+            };
+            // Recurse
+            this.resolveChildren(childComponent, map);
+            resolvedChildren.push(childComponent);
+          } else {
+            console.warn(`Could not resolve child ID: ${item}`);
+          }
+        } else {
+          // Already an object (unexpected but possible if mixed)
+          resolvedChildren.push(item);
+        }
+      }
+
+      // Replace the array of IDs with array of Objects
+      component.properties.children = resolvedChildren;
+    }
   }
 }

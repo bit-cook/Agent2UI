@@ -12,8 +12,7 @@ import '@material/web/labs/navigationbar/navigation-bar.js';
   template: `
     <md-navigation-bar
         [activeIndex]="resolvedActiveIndex()"
-        [hideInactiveLabels]="resolvedHideInactiveLabels()"
-        [tabs]="resolvedTabs()">
+        [hideInactiveLabels]="resolvedHideInactiveLabels()">
       <ng-content></ng-content>
     </md-navigation-bar>
   `,
@@ -23,18 +22,13 @@ import '@material/web/labs/navigationbar/navigation-bar.js';
 export class MdNavigationBar extends DynamicComponent {
   readonly activeIndex = input<Primitives.NumberValue | number | null>(null);
   readonly hideInactiveLabels = input<Primitives.BooleanValue | boolean | null>(null);
-  readonly tabs = input<Primitives.StringValue | string | null>(null);
 
   protected resolvedActiveIndex = computed(() => {
     const v = this.activeIndex();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.NumberValue) : (v as number)) ?? 0;
+    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.NumberValue) : (v as number)) ?? undefined;
   });
   protected resolvedHideInactiveLabels = computed(() => {
     const v = this.hideInactiveLabels();
     return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.BooleanValue) : (v as boolean)) ?? false;
-  });
-  protected resolvedTabs = computed(() => {
-    const v = this.tabs();
-    return ((v && typeof v === 'object') ? this.resolvePrimitive(v as Primitives.StringValue) : (v as string)) ?? '';
   });
 }

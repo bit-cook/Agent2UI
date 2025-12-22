@@ -1,171 +1,5 @@
 [
   {
-    "name": "Card",
-    "tag": "Layout",
-    "type": "Card",
-    "properties": {
-      "child": {
-        "id": "card-text",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Content inside a card"
-          }
-        }
-      }
-    }
-  },
-  {
-    "name": "Column",
-    "tag": "Layout",
-    "type": "Column",
-    "properties": {
-      "alignment": "center",
-      "children": {
-        "explicitList": [
-          "col-1",
-          "col-2"
-        ]
-      }
-    },
-    "children_definitions": [
-      {
-        "id": "col-1",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Item 1"
-          }
-        }
-      },
-      {
-        "id": "col-2",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Item 2"
-          }
-        }
-      }
-    ]
-  },
-  {
-    "name": "Row",
-    "tag": "Layout",
-    "type": "Row",
-    "properties": {
-      "alignment": "center",
-      "distribution": "space-around",
-      "children": {
-        "explicitList": [
-          "row-1",
-          "row-2"
-        ]
-      }
-    },
-    "children_definitions": [
-      {
-        "id": "row-1",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Left"
-          }
-        }
-      },
-      {
-        "id": "row-2",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Right"
-          }
-        }
-      }
-    ]
-  },
-  {
-    "name": "Text",
-    "tag": "Layout",
-    "type": "Text",
-    "properties": {
-      "text": {
-        "literalString": "Standard Text"
-      }
-    }
-  },
-  {
-    "name": "Divider",
-    "tag": "Layout",
-    "type": "Column",
-    "properties": {
-      "children": {
-        "explicitList": [
-          "div-1",
-          "div-2",
-          "div-3"
-        ]
-      }
-    },
-    "children_definitions": [
-      {
-        "id": "div-1",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Above"
-          }
-        }
-      },
-      {
-        "id": "div-2",
-        "type": "Divider",
-        "properties": {}
-      },
-      {
-        "id": "div-3",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Below"
-          }
-        }
-      }
-    ]
-  },
-  {
-    "name": "Image",
-    "tag": "Media",
-    "type": "Image",
-    "properties": {
-      "url": {
-        "literalString": "https://picsum.photos/id/10/300/200"
-      }
-    }
-  },
-  {
-    "name": "Button",
-    "tag": "Inputs",
-    "type": "Button",
-    "properties": {
-      "label": {
-        "literalString": "Click Me"
-      },
-      "action": {
-        "type": "click"
-      },
-      "child": {
-        "id": "btn-text",
-        "type": "Text",
-        "properties": {
-          "text": {
-            "literalString": "Click Me"
-          }
-        }
-      }
-    }
-  },
-  {
     "name": "MdSecondaryTab",
     "tag": "Material",
     "type": "MdSecondaryTab",
@@ -184,12 +18,649 @@
   {
     "name": "MdTabs",
     "tag": "Material",
-    "type": "MdTabs",
+    "type": "Column",
     "properties": {
-      "autoActivate": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdTabs-0",
+        "ex-MdTabs-1",
+        "ex-MdTabs-2",
+        "ex-MdTabs-3",
+        "ex-MdTabs-4",
+        "ex-MdTabs-5",
+        "ex-MdTabs-6",
+        "ex-MdTabs-7",
+        "ex-MdTabs-8",
+        "ex-MdTabs-9"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344601344",
+            "child-1-4344601536",
+            "child-2-4344601728"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Video"
+              }
+            },
+            "id": "child-0-4344601344"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Photos"
+              }
+            },
+            "id": "child-1-4344601536"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Audio"
+              }
+            },
+            "id": "child-2-4344601728"
+          }
+        ],
+        "id": "ex-MdTabs-0"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344602304",
+            "child-1-4344602496",
+            "child-2-4344602688"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdSecondaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Birds"
+              }
+            },
+            "id": "child-0-4344602304"
+          },
+          {
+            "type": "MdSecondaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Cats"
+              }
+            },
+            "id": "child-1-4344602496"
+          },
+          {
+            "type": "MdSecondaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Dogs"
+              }
+            },
+            "id": "child-2-4344602688"
+          }
+        ],
+        "id": "ex-MdTabs-1"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344603328",
+            "child-1-4344603712",
+            "child-2-4344603904"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Video"
+              }
+            },
+            "id": "child-0-4344603328"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "active": {
+                "literalBoolean": true
+              },
+              "label": {
+                "literalString": "Photos"
+              }
+            },
+            "id": "child-1-4344603712"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Audio"
+              }
+            },
+            "id": "child-2-4344603904"
+          }
+        ],
+        "id": "ex-MdTabs-2"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344604864",
+            "child-1-4344605504"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Keyboard"
+              },
+              "children": [
+                "child-0-4344604800"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "piano"
+                  }
+                },
+                "id": "child-0-4344604800"
+              }
+            ],
+            "id": "child-0-4344604864"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Guitar"
+              },
+              "children": [
+                "child-0-4344605440"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "tune"
+                  }
+                },
+                "id": "child-0-4344605440"
+              }
+            ],
+            "id": "child-1-4344605504"
+          }
+        ],
+        "id": "ex-MdTabs-3"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344606464",
+            "child-1-4344607040"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "children": [
+                "child-0-4344606400"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "piano"
+                  }
+                },
+                "id": "child-0-4344606400"
+              }
+            ],
+            "id": "child-0-4344606464"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "children": [
+                "child-0-4344606976"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "tune"
+                  }
+                },
+                "id": "child-0-4344606976"
+              }
+            ],
+            "id": "child-1-4344607040"
+          }
+        ],
+        "id": "ex-MdTabs-4"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344608128",
+            "child-1-4344608768"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Keyboard"
+              },
+              "children": [
+                "child-0-4344608064"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "piano"
+                  }
+                },
+                "id": "child-0-4344608064"
+              }
+            ],
+            "id": "child-0-4344608128"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Guitar"
+              },
+              "children": [
+                "child-0-4344608704"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "tune"
+                  }
+                },
+                "id": "child-0-4344608704"
+              }
+            ],
+            "id": "child-1-4344608768"
+          }
+        ],
+        "id": "ex-MdTabs-5"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344609920",
+            "child-1-4344610688"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "inlineIcon": {
+                "literalBoolean": true
+              },
+              "label": {
+                "literalString": "Keyboard"
+              },
+              "children": [
+                "child-0-4344609856"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "piano"
+                  }
+                },
+                "id": "child-0-4344609856"
+              }
+            ],
+            "id": "child-0-4344609920"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "inlineIcon": {
+                "literalBoolean": true
+              },
+              "label": {
+                "literalString": "Guitar"
+              },
+              "children": [
+                "child-0-4344610624"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "tune"
+                  }
+                },
+                "id": "child-0-4344610624"
+              }
+            ],
+            "id": "child-1-4344610688"
+          }
+        ],
+        "id": "ex-MdTabs-6"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "children": [
+            "child-0-4344333248",
+            "child-1-4344333888",
+            "child-2-4344334528"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdSecondaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Travel"
+              },
+              "children": [
+                "child-0-4344333184"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "flight"
+                  }
+                },
+                "id": "child-0-4344333184"
+              }
+            ],
+            "id": "child-0-4344333248"
+          },
+          {
+            "type": "MdSecondaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Hotel"
+              },
+              "children": [
+                "child-0-4344333824"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "hotel"
+                  }
+                },
+                "id": "child-0-4344333824"
+              }
+            ],
+            "id": "child-1-4344333888"
+          },
+          {
+            "type": "MdSecondaryTab",
+            "properties": {
+              "label": {
+                "literalString": "Activities"
+              },
+              "children": [
+                "child-0-4344334464"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "hiking"
+                  }
+                },
+                "id": "child-0-4344334464"
+              }
+            ],
+            "id": "child-2-4344334528"
+          }
+        ],
+        "id": "ex-MdTabs-7"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Content to view"
+          },
+          "children": [
+            "child-0-4344335808",
+            "child-1-4344336512",
+            "child-2-4344337216"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "ariaLabel": {
+                "literalString": "Photos"
+              },
+              "children": [
+                "child-0-4344335744"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "photo"
+                  }
+                },
+                "id": "child-0-4344335744"
+              }
+            ],
+            "id": "child-0-4344335808"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "ariaLabel": {
+                "literalString": "Videos"
+              },
+              "children": [
+                "child-0-4344336448"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "videocam"
+                  }
+                },
+                "id": "child-0-4344336448"
+              }
+            ],
+            "id": "child-1-4344336512"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "ariaLabel": {
+                "literalString": "Music"
+              },
+              "children": [
+                "child-0-4344337152"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "audiotrack"
+                  }
+                },
+                "id": "child-0-4344337152"
+              }
+            ],
+            "id": "child-2-4344337216"
+          }
+        ],
+        "id": "ex-MdTabs-8"
+      },
+      {
+        "type": "MdTabs",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Content to view"
+          },
+          "children": [
+            "child-0-4344338240",
+            "child-1-4344338624",
+            "child-2-4344339008"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "id": {
+                "literalString": "photos-tab"
+              },
+              "ariaControls": {
+                "literalString": "photos-panel"
+              },
+              "label": {
+                "literalString": "Photos"
+              }
+            },
+            "id": "child-0-4344338240"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "id": {
+                "literalString": "videos-tab"
+              },
+              "ariaControls": {
+                "literalString": "videos-panel"
+              },
+              "label": {
+                "literalString": "Videos"
+              }
+            },
+            "id": "child-1-4344338624"
+          },
+          {
+            "type": "MdPrimaryTab",
+            "properties": {
+              "id": {
+                "literalString": "music-tab"
+              },
+              "ariaControls": {
+                "literalString": "music-panel"
+              },
+              "label": {
+                "literalString": "Music"
+              }
+            },
+            "id": "child-2-4344339008"
+          }
+        ],
+        "id": "ex-MdTabs-9"
       }
-    }
+    ]
   },
   {
     "name": "MdPrimaryTab",
@@ -244,22 +715,7 @@
       }
     }
   },
-  {
-    "name": "MdNavigationBar",
-    "tag": "Material",
-    "type": "MdNavigationBar",
-    "properties": {
-      "activeIndex": {
-        "literalNumber": 0
-      },
-      "hideInactiveLabels": {
-        "literalString": "MdNavigationBar"
-      },
-      "tabs": {
-        "literalString": "value"
-      }
-    }
-  },
+  
   {
     "name": "MdOutlinedSegmentedButtonSet",
     "tag": "Material",
@@ -267,9 +723,6 @@
     "properties": {
       "multiselect": {
         "literalBoolean": false
-      },
-      "buttons": {
-        "literalString": "value"
       }
     }
   },
@@ -307,7 +760,7 @@
         "literalBoolean": false
       },
       "hideInactiveLabel": {
-        "literalString": "MdNavigationTab"
+        "literalBoolean": false
       },
       "label": {
         "literalString": "MdNavigationTab"
@@ -317,9 +770,6 @@
       },
       "showBadge": {
         "literalBoolean": false
-      },
-      "buttonElement": {
-        "literalString": "value"
       }
     }
   },
@@ -336,62 +786,215 @@
   {
     "name": "MdRadio",
     "tag": "Material",
-    "type": "MdRadio",
+    "type": "Column",
     "properties": {
-      "required": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdRadio-0",
+        "ex-MdRadio-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdRadio",
+        "properties": {
+          "id": {
+            "literalString": "cats-radio"
+          },
+          "name": {
+            "literalString": "animals"
+          },
+          "value": {
+            "literalString": "cats"
+          }
+        },
+        "id": "ex-MdRadio-0"
       },
-      "value": {
-        "literalString": "value"
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdRadio",
+        "properties": {
+          "id": {
+            "literalString": "dogs-radio"
+          },
+          "name": {
+            "literalString": "animals"
+          },
+          "value": {
+            "literalString": "dogs"
+          }
+        },
+        "id": "ex-MdRadio-1"
       }
-    }
+    ]
   },
   {
     "name": "MdCircularProgress",
     "tag": "Material",
-    "type": "MdCircularProgress",
+    "type": "Column",
     "properties": {
-      "value": {
-        "literalNumber": 0
+      "alignment": "center",
+      "children": [
+        "ex-MdCircularProgress-0",
+        "ex-MdCircularProgress-1",
+        "ex-MdCircularProgress-2",
+        "ex-MdCircularProgress-3",
+        "ex-MdCircularProgress-4",
+        "ex-MdCircularProgress-5"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdCircularProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.75"
+          }
+        },
+        "id": "ex-MdCircularProgress-0"
       },
-      "max": {
-        "literalNumber": 0
+      {
+        "type": "MdCircularProgress",
+        "properties": {
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdCircularProgress-1"
       },
-      "indeterminate": {
-        "literalBoolean": false
+      {
+        "type": "MdCircularProgress",
+        "properties": {
+          "fourColor": {
+            "literalBoolean": true
+          },
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdCircularProgress-2"
       },
-      "fourColor": {
-        "literalBoolean": false
+      {
+        "type": "MdCircularProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.5"
+          },
+          "ariaLabel": {
+            "literalString": "Page refresh progress"
+          }
+        },
+        "id": "ex-MdCircularProgress-3"
+      },
+      {
+        "type": "MdCircularProgress",
+        "properties": {
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdCircularProgress-4"
+      },
+      {
+        "type": "MdCircularProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.6"
+          }
+        },
+        "id": "ex-MdCircularProgress-5"
       }
-    }
+    ]
   },
   {
     "name": "MdLinearProgress",
     "tag": "Material",
-    "type": "MdLinearProgress",
+    "type": "Column",
     "properties": {
-      "value": {
-        "literalNumber": 0
+      "alignment": "center",
+      "children": [
+        "ex-MdLinearProgress-0",
+        "ex-MdLinearProgress-1",
+        "ex-MdLinearProgress-2",
+        "ex-MdLinearProgress-3",
+        "ex-MdLinearProgress-4",
+        "ex-MdLinearProgress-5",
+        "ex-MdLinearProgress-6"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdLinearProgress-0"
       },
-      "max": {
-        "literalNumber": 0
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.5"
+          }
+        },
+        "id": "ex-MdLinearProgress-1"
       },
-      "indeterminate": {
-        "literalBoolean": false
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "fourColor": {
+            "literalBoolean": true
+          },
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdLinearProgress-2"
       },
-      "fourColor": {
-        "literalBoolean": false
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.5"
+          },
+          "ariaLabel": {
+            "literalString": "Download progress"
+          }
+        },
+        "id": "ex-MdLinearProgress-3"
       },
-      "buffer": {
-        "literalNumber": 0
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdLinearProgress-4"
+      },
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.6"
+          }
+        },
+        "id": "ex-MdLinearProgress-5"
+      },
+      {
+        "type": "MdLinearProgress",
+        "properties": {
+          "value": {
+            "literalString": "0.5"
+          },
+          "buffer": {
+            "literalString": "0.8"
+          }
+        },
+        "id": "ex-MdLinearProgress-6"
       }
-    }
+    ]
   },
   {
     "name": "MdInputChip",
@@ -549,8 +1152,540 @@
   {
     "name": "MdChipSet",
     "tag": "Material",
-    "type": "MdChipSet",
-    "properties": {}
+    "type": "Column",
+    "properties": {
+      "alignment": "center",
+      "children": [
+        "ex-MdChipSet-0",
+        "ex-MdChipSet-1",
+        "ex-MdChipSet-2",
+        "ex-MdChipSet-3",
+        "ex-MdChipSet-4",
+        "ex-MdChipSet-5",
+        "ex-MdChipSet-6",
+        "ex-MdChipSet-7",
+        "ex-MdChipSet-8",
+        "ex-MdChipSet-9",
+        "ex-MdChipSet-10"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4344311232",
+            "child-1-4344311424",
+            "child-2-4344311616",
+            "child-3-4344311808"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Assist"
+              }
+            },
+            "id": "child-0-4344311232"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Filter"
+              }
+            },
+            "id": "child-1-4344311424"
+          },
+          {
+            "type": "MdInputChip",
+            "properties": {
+              "label": {
+                "literalString": "Input"
+              }
+            },
+            "id": "child-2-4344311616"
+          },
+          {
+            "type": "MdSuggestionChip",
+            "properties": {
+              "label": {
+                "literalString": "Suggestion"
+              }
+            },
+            "id": "child-3-4344311808"
+          }
+        ],
+        "id": "ex-MdChipSet-0"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4344312512",
+            "child-1-4344312704",
+            "child-2-4344312896"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "All day"
+              }
+            },
+            "id": "child-0-4344312512"
+          },
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Add to calendar"
+              }
+            },
+            "id": "child-1-4344312704"
+          },
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Set a reminder"
+              }
+            },
+            "id": "child-2-4344312896"
+          }
+        ],
+        "id": "ex-MdChipSet-1"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4344313856",
+            "child-1-4344314240"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Add to calendar"
+              },
+              "children": [
+                "child-0-4344313792"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "event"
+                  }
+                },
+                "id": "child-0-4344313792"
+              }
+            ],
+            "id": "child-0-4344313856"
+          },
+          {
+            "type": "MdInputChip",
+            "properties": {
+              "label": {
+                "literalString": "Ping Qiang"
+              },
+              "avatar": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-1-4344314240"
+          }
+        ],
+        "id": "ex-MdChipSet-2"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "ariaLabelledby": {
+            "literalString": "dates-label"
+          },
+          "children": [
+            "child-0-4344315072",
+            "child-1-4344315392",
+            "child-2-4344315712"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Mon"
+              },
+              "ariaLabel": {
+                "literalString": "Monday"
+              }
+            },
+            "id": "child-0-4344315072"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Tue"
+              },
+              "ariaLabel": {
+                "literalString": "Tuesday"
+              }
+            },
+            "id": "child-1-4344315392"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Wed"
+              },
+              "ariaLabel": {
+                "literalString": "Wednesday"
+              }
+            },
+            "id": "child-2-4344315712"
+          }
+        ],
+        "id": "ex-MdChipSet-3"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Actions"
+          },
+          "children": [
+            "child-0-4345123200",
+            "child-1-4345123520"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Copy"
+              },
+              "softDisabled": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-0-4345123200"
+          },
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Paste"
+              },
+              "softDisabled": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-1-4345123520"
+          }
+        ],
+        "id": "ex-MdChipSet-4"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4345124672",
+            "child-1-4345125312"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "Add to my itinerary"
+              },
+              "children": [
+                "child-0-4345124608"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "calendar"
+                  }
+                },
+                "id": "child-0-4345124608"
+              }
+            ],
+            "id": "child-0-4345124672"
+          },
+          {
+            "type": "MdAssistChip",
+            "properties": {
+              "label": {
+                "literalString": "12 mins from hotel"
+              },
+              "children": [
+                "child-0-4345125248"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "icon"
+                  },
+                  "fontIcon": {
+                    "literalString": "map"
+                  }
+                },
+                "id": "child-0-4345125248"
+              }
+            ],
+            "id": "child-1-4345125312"
+          }
+        ],
+        "id": "ex-MdChipSet-5"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4345126016",
+            "child-1-4345126272",
+            "child-2-4345126528",
+            "child-3-4345126720"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Docs"
+              }
+            },
+            "id": "child-0-4345126016"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Slides"
+              },
+              "selected": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-1-4345126272"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Sheets"
+              },
+              "selected": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-2-4345126528"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Images"
+              }
+            },
+            "id": "child-3-4345126720"
+          }
+        ],
+        "id": "ex-MdChipSet-6"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4345127552",
+            "child-1-4345127808",
+            "child-2-4345128064",
+            "child-3-4345128320"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Red"
+              },
+              "removable": {
+                "literalBoolean": true
+              },
+              "selected": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-0-4345127552"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Yellow"
+              },
+              "removable": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-1-4345127808"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Blue"
+              },
+              "removable": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-2-4345128064"
+          },
+          {
+            "type": "MdFilterChip",
+            "properties": {
+              "label": {
+                "literalString": "Green"
+              },
+              "removable": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-3-4345128320"
+          }
+        ],
+        "id": "ex-MdChipSet-7"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4345129344"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdInputChip",
+            "properties": {
+              "label": {
+                "literalString": "Ping Qiang"
+              },
+              "avatar": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-0-4345129344"
+          }
+        ],
+        "id": "ex-MdChipSet-8"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4345129920",
+            "child-1-4345130240"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdInputChip",
+            "properties": {
+              "label": {
+                "literalString": "Star Wars"
+              },
+              "removeOnly": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-0-4345129920"
+          },
+          {
+            "type": "MdInputChip",
+            "properties": {
+              "label": {
+                "literalString": "Star Trek"
+              },
+              "removeOnly": {
+                "literalBoolean": true
+              }
+            },
+            "id": "child-1-4345130240"
+          }
+        ],
+        "id": "ex-MdChipSet-9"
+      },
+      {
+        "type": "MdChipSet",
+        "properties": {
+          "children": [
+            "child-0-4345130816",
+            "child-1-4345131008",
+            "child-2-4345131200"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdSuggestionChip",
+            "properties": {
+              "label": {
+                "literalString": "I agree"
+              }
+            },
+            "id": "child-0-4345130816"
+          },
+          {
+            "type": "MdSuggestionChip",
+            "properties": {
+              "label": {
+                "literalString": "Looks good to me"
+              }
+            },
+            "id": "child-1-4345131008"
+          },
+          {
+            "type": "MdSuggestionChip",
+            "properties": {
+              "label": {
+                "literalString": "Thank you"
+              }
+            },
+            "id": "child-2-4345131200"
+          }
+        ],
+        "id": "ex-MdChipSet-10"
+      }
+    ]
   },
   {
     "name": "MdAssistChip",
@@ -604,39 +1739,402 @@
   {
     "name": "MdFab",
     "tag": "Material",
-    "type": "MdFab",
+    "type": "Column",
     "properties": {
-      "size": {
-        "literalString": "value"
+      "alignment": "center",
+      "children": [
+        "ex-MdFab-0",
+        "ex-MdFab-1",
+        "ex-MdFab-2",
+        "ex-MdFab-3",
+        "ex-MdFab-4",
+        "ex-MdFab-5",
+        "ex-MdFab-6",
+        "ex-MdFab-7",
+        "ex-MdFab-8",
+        "ex-MdFab-9",
+        "ex-MdFab-10",
+        "ex-MdFab-11",
+        "ex-MdFab-12",
+        "ex-MdFab-13"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFab",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344646592"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344646592"
+          }
+        ],
+        "id": "ex-MdFab-0"
       },
-      "label": {
-        "literalString": "MdFab"
+      {
+        "type": "MdFab",
+        "properties": {
+          "lowered": {
+            "literalBoolean": true
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344647360"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344647360"
+          }
+        ],
+        "id": "ex-MdFab-1"
       },
-      "lowered": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344648064"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344648064"
+          }
+        ],
+        "id": "ex-MdFab-2"
       },
-      "small": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "label": {
+            "literalString": "Edit"
+          },
+          "ariaLabel": {
+            "literalString": "Edit Comment"
+          },
+          "children": [
+            "child-0-4344648832"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344648832"
+          }
+        ],
+        "id": "ex-MdFab-3"
       },
-      "large": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344649536"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344649536"
+          }
+        ],
+        "id": "ex-MdFab-4"
       },
-      "extended": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "label": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344650240"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344650240"
+          }
+        ],
+        "id": "ex-MdFab-5"
       },
-      "variant": {
-        "literalString": "value"
+      {
+        "type": "MdFab",
+        "properties": {
+          "label": {
+            "literalString": "Reroute"
+          }
+        },
+        "id": "ex-MdFab-6"
       },
-      "primary": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "variant": {
+            "literalString": "primary"
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344651200"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344651200"
+          }
+        ],
+        "id": "ex-MdFab-7"
       },
-      "secondary": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "variant": {
+            "literalString": "secondary"
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344651968"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344651968"
+          }
+        ],
+        "id": "ex-MdFab-8"
       },
-      "tertiary": {
-        "literalBoolean": false
+      {
+        "type": "MdFab",
+        "properties": {
+          "variant": {
+            "literalString": "tertiary"
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344652672"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344652672"
+          }
+        ],
+        "id": "ex-MdFab-9"
+      },
+      {
+        "type": "MdFab",
+        "properties": {
+          "size": {
+            "literalString": "small"
+          },
+          "touchTarget": {
+            "literalString": "none"
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344653568"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344653568"
+          }
+        ],
+        "id": "ex-MdFab-10"
+      },
+      {
+        "type": "MdFab",
+        "properties": {
+          "size": {
+            "literalString": "small"
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344654336"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344654336"
+          }
+        ],
+        "id": "ex-MdFab-11"
+      },
+      {
+        "type": "MdFab",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344655040"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344655040"
+          }
+        ],
+        "id": "ex-MdFab-12"
+      },
+      {
+        "type": "MdFab",
+        "properties": {
+          "size": {
+            "literalString": "large"
+          },
+          "ariaLabel": {
+            "literalString": "Edit"
+          },
+          "children": [
+            "child-0-4344655808"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "icon"
+              },
+              "fontIcon": {
+                "literalString": "edit"
+              }
+            },
+            "id": "child-0-4344655808"
+          }
+        ],
+        "id": "ex-MdFab-13"
       }
-    }
+    ]
   },
   {
     "name": "MdBrandedFab",
@@ -678,288 +2176,593 @@
   {
     "name": "MdCheckbox",
     "tag": "Material",
-    "type": "MdCheckbox",
+    "type": "Column",
     "properties": {
-      "delegatesFocus": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdCheckbox-0",
+        "ex-MdCheckbox-1",
+        "ex-MdCheckbox-2",
+        "ex-MdCheckbox-3",
+        "ex-MdCheckbox-4"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdCheckbox",
+        "properties": {
+          "touchTarget": {
+            "literalString": "wrapper"
+          }
+        },
+        "id": "ex-MdCheckbox-0"
       },
-      "mode": {
-        "literalString": "value"
+      {
+        "type": "MdCheckbox",
+        "properties": {
+          "touchTarget": {
+            "literalString": "wrapper"
+          },
+          "checked": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdCheckbox-1"
       },
-      "serializable": {
-        "literalBoolean": false
+      {
+        "type": "MdCheckbox",
+        "properties": {
+          "touchTarget": {
+            "literalString": "wrapper"
+          },
+          "indeterminate": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdCheckbox-2"
       },
-      "slotAssignment": {
-        "literalString": "value"
+      {
+        "type": "MdCheckbox",
+        "properties": {
+          "id": {
+            "literalString": "checkbox-two"
+          },
+          "touchTarget": {
+            "literalString": "wrapper"
+          }
+        },
+        "id": "ex-MdCheckbox-3"
       },
-      "checked": {
-        "literalBoolean": false
-      },
-      "indeterminate": {
-        "literalBoolean": false
-      },
-      "required": {
-        "literalBoolean": false
-      },
-      "value": {
-        "literalString": "value"
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdCheckbox",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Select all checkboxes"
+          }
+        },
+        "id": "ex-MdCheckbox-4"
       }
-    }
+    ]
   },
   {
     "name": "MdOutlinedTextField",
     "tag": "Material",
-    "type": "MdOutlinedTextField",
+    "type": "Column",
     "properties": {
-      "error": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdOutlinedTextField-0",
+        "ex-MdOutlinedTextField-1",
+        "ex-MdOutlinedTextField-2",
+        "ex-MdOutlinedTextField-3",
+        "ex-MdOutlinedTextField-4",
+        "ex-MdOutlinedTextField-5",
+        "ex-MdOutlinedTextField-6",
+        "ex-MdOutlinedTextField-7",
+        "ex-MdOutlinedTextField-8",
+        "ex-MdOutlinedTextField-9",
+        "ex-MdOutlinedTextField-10",
+        "ex-MdOutlinedTextField-11",
+        "ex-MdOutlinedTextField-12"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "type": {
+            "literalString": "textarea"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-0"
       },
-      "errorText": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Attendees"
+          },
+          "type": {
+            "literalString": "email"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-1"
       },
-      "label": {
-        "literalString": "MdOutlinedTextField"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Label"
+          },
+          "value": {
+            "literalString": "Value"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-2"
       },
-      "noAsterisk": {
-        "literalBoolean": false
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Favorite food"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-3"
       },
-      "required": {
-        "literalBoolean": false
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "placeholder": {
+            "literalString": "email@domain.com"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-4"
       },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "First name"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-5"
       },
-      "prefixText": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "placeholder": {
+            "literalString": "Search for messages"
+          },
+          "children": [
+            "child-0-4344341504"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "leading-icon"
+              },
+              "fontIcon": {
+                "literalString": "search"
+              }
+            },
+            "id": "child-0-4344341504"
+          }
+        ],
+        "id": "ex-MdOutlinedTextField-6"
       },
-      "suffixText": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Password"
+          },
+          "type": {
+            "literalString": "password"
+          },
+          "children": [
+            "child-0-4344342720"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIconButton",
+            "properties": {
+              "toggle": {
+                "literalBoolean": true
+              },
+              "slot": {
+                "literalString": "trailing-icon"
+              },
+              "children": [
+                "child-0-4344342336",
+                "child-1-4344342656"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "fontIcon": {
+                    "literalString": "visibility"
+                  }
+                },
+                "id": "child-0-4344342336"
+              },
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "selected"
+                  },
+                  "fontIcon": {
+                    "literalString": "visibility_off"
+                  }
+                },
+                "id": "child-1-4344342656"
+              }
+            ],
+            "id": "child-0-4344342720"
+          }
+        ],
+        "id": "ex-MdOutlinedTextField-7"
       },
-      "hasLeadingIcon": {
-        "literalBoolean": false
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Username"
+          },
+          "error": {
+            "literalBoolean": true
+          },
+          "errorText": {
+            "literalString": "Username not available"
+          },
+          "children": [
+            "child-0-4344343744"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "trailing-icon"
+              },
+              "fontIcon": {
+                "literalString": "error"
+              }
+            },
+            "id": "child-0-4344343744"
+          }
+        ],
+        "id": "ex-MdOutlinedTextField-8"
       },
-      "hasTrailingIcon": {
-        "literalBoolean": false
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Dollar amount"
+          },
+          "type": {
+            "literalString": "number"
+          },
+          "value": {
+            "literalString": "0"
+          },
+          "prefixText": {
+            "literalString": "$"
+          },
+          "suffixText": {
+            "literalString": ".00"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-9"
       },
-      "supportingText": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Title"
+          },
+          "value": {
+            "literalString": "Short"
+          },
+          "maxlength": {
+            "literalString": "10"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-10"
       },
-      "textDirection": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Username"
+          },
+          "value": {
+            "literalString": "jdoe"
+          },
+          "error": {
+            "literalBoolean": true
+          },
+          "errorText": {
+            "literalString": "Username is not available"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-11"
       },
-      "rows": {
-        "literalNumber": 0
-      },
-      "cols": {
-        "literalNumber": 0
-      },
-      "inputMode": {
-        "literalString": "value"
-      },
-      "max": {
-        "literalString": "value"
-      },
-      "maxLength": {
-        "literalNumber": 0
-      },
-      "min": {
-        "literalString": "value"
-      },
-      "minLength": {
-        "literalNumber": 0
-      },
-      "noSpinner": {
-        "literalBoolean": false
-      },
-      "pattern": {
-        "literalString": "value"
-      },
-      "placeholder": {
-        "literalString": "value"
-      },
-      "readOnly": {
-        "literalBoolean": false
-      },
-      "multiple": {
-        "literalBoolean": false
-      },
-      "step": {
-        "literalString": "value"
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "autocomplete": {
-        "literalString": "value"
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedTextField",
+        "properties": {
+          "label": {
+            "literalString": "Outlined"
+          },
+          "value": {
+            "literalString": "Value"
+          }
+        },
+        "id": "ex-MdOutlinedTextField-12"
       }
-    }
+    ]
   },
   {
     "name": "MdFilledTextField",
     "tag": "Material",
-    "type": "MdFilledTextField",
+    "type": "Column",
     "properties": {
-      "error": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdFilledTextField-0",
+        "ex-MdFilledTextField-1",
+        "ex-MdFilledTextField-2",
+        "ex-MdFilledTextField-3",
+        "ex-MdFilledTextField-4",
+        "ex-MdFilledTextField-5",
+        "ex-MdFilledTextField-6",
+        "ex-MdFilledTextField-7",
+        "ex-MdFilledTextField-8"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "id": {
+            "literalString": "textfield"
+          },
+          "type": {
+            "literalString": "combobox"
+          },
+          "ariaControls": {
+            "literalString": "menu"
+          },
+          "ariaAutocomplete": {
+            "literalString": "list"
+          },
+          "ariaExpanded": {
+            "literalString": "true"
+          },
+          "ariaActivedescendant": {
+            "literalString": "1"
+          },
+          "value": {
+            "literalString": "Ala"
+          }
+        },
+        "id": "ex-MdFilledTextField-0"
       },
-      "errorText": {
-        "literalString": "value"
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "Label"
+          },
+          "value": {
+            "literalString": "Value"
+          }
+        },
+        "id": "ex-MdFilledTextField-1"
       },
-      "label": {
-        "literalString": "MdFilledTextField"
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "Username"
+          },
+          "type": {
+            "literalString": "email"
+          }
+        },
+        "id": "ex-MdFilledTextField-2"
       },
-      "noAsterisk": {
-        "literalBoolean": false
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "Password"
+          },
+          "type": {
+            "literalString": "password"
+          }
+        },
+        "id": "ex-MdFilledTextField-3"
       },
-      "required": {
-        "literalBoolean": false
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "Comments"
+          },
+          "supportingText": {
+            "literalString": "Provide comments for the issue"
+          }
+        },
+        "id": "ex-MdFilledTextField-4"
       },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "Name"
+          },
+          "required": {
+            "literalBoolean": true
+          },
+          "supportingText": {
+            "literalString": "*required"
+          },
+          "errorText": {
+            "literalString": "Please fill out this field"
+          }
+        },
+        "id": "ex-MdFilledTextField-5"
       },
-      "prefixText": {
-        "literalString": "value"
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Username"
+          }
+        },
+        "id": "ex-MdFilledTextField-6"
       },
-      "suffixText": {
-        "literalString": "value"
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "First"
+          },
+          "ariaLabel": {
+            "literalString": "First name"
+          }
+        },
+        "id": "ex-MdFilledTextField-7"
       },
-      "hasLeadingIcon": {
-        "literalBoolean": false
-      },
-      "hasTrailingIcon": {
-        "literalBoolean": false
-      },
-      "supportingText": {
-        "literalString": "value"
-      },
-      "textDirection": {
-        "literalString": "value"
-      },
-      "rows": {
-        "literalNumber": 0
-      },
-      "cols": {
-        "literalNumber": 0
-      },
-      "inputMode": {
-        "literalString": "value"
-      },
-      "max": {
-        "literalString": "value"
-      },
-      "maxLength": {
-        "literalNumber": 0
-      },
-      "min": {
-        "literalString": "value"
-      },
-      "minLength": {
-        "literalNumber": 0
-      },
-      "noSpinner": {
-        "literalBoolean": false
-      },
-      "pattern": {
-        "literalString": "value"
-      },
-      "placeholder": {
-        "literalString": "value"
-      },
-      "readOnly": {
-        "literalBoolean": false
-      },
-      "multiple": {
-        "literalBoolean": false
-      },
-      "step": {
-        "literalString": "value"
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "autocomplete": {
-        "literalString": "value"
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdFilledTextField",
+        "properties": {
+          "label": {
+            "literalString": "Filled"
+          },
+          "value": {
+            "literalString": "Value"
+          }
+        },
+        "id": "ex-MdFilledTextField-8"
       }
-    }
+    ]
   },
   {
     "name": "MdSlider",
     "tag": "Material",
-    "type": "MdSlider",
+    "type": "Column",
     "properties": {
-      "min": {
-        "literalNumber": 0
+      "alignment": "center",
+      "children": [
+        "ex-MdSlider-0",
+        "ex-MdSlider-1",
+        "ex-MdSlider-2",
+        "ex-MdSlider-3",
+        "ex-MdSlider-4",
+        "ex-MdSlider-5",
+        "ex-MdSlider-6"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdSlider",
+        "properties": { },
+        "id": "ex-MdSlider-0"
       },
-      "max": {
-        "literalNumber": 0
+      {
+        "type": "MdSlider",
+        "properties": {
+          "ticks": {
+            "literalBoolean": true
+          },
+          "value": {
+            "literalString": "50"
+          }
+        },
+        "id": "ex-MdSlider-1"
       },
-      "value": {
-        "literalNumber": 0
+      {
+        "type": "MdSlider",
+        "properties": {
+          "range": {
+            "literalBoolean": true
+          },
+          "valueStart": {
+            "literalString": "25"
+          },
+          "valueEnd": {
+            "literalString": "75"
+          }
+        },
+        "id": "ex-MdSlider-2"
       },
-      "valueStart": {
-        "literalNumber": 0
+      {
+        "type": "MdSlider",
+        "properties": {
+          "min": {
+            "literalString": "0"
+          },
+          "max": {
+            "literalString": "100"
+          },
+          "value": {
+            "literalString": "50"
+          }
+        },
+        "id": "ex-MdSlider-3"
       },
-      "valueEnd": {
-        "literalNumber": 0
+      {
+        "type": "MdSlider",
+        "properties": {
+          "step": {
+            "literalString": "5"
+          },
+          "ticks": {
+            "literalBoolean": true
+          },
+          "min": {
+            "literalString": "0"
+          },
+          "max": {
+            "literalString": "20"
+          }
+        },
+        "id": "ex-MdSlider-4"
       },
-      "valueLabel": {
-        "literalString": "MdSlider"
+      {
+        "type": "MdSlider",
+        "properties": {
+          "range": {
+            "literalBoolean": true
+          },
+          "valueStart": {
+            "literalString": "25"
+          },
+          "valueEnd": {
+            "literalString": "50"
+          }
+        },
+        "id": "ex-MdSlider-5"
       },
-      "valueLabelStart": {
-        "literalString": "MdSlider"
-      },
-      "valueLabelEnd": {
-        "literalString": "MdSlider"
-      },
-      "ariaLabelStart": {
-        "literalString": "MdSlider"
-      },
-      "ariaValueTextStart": {
-        "literalString": "value"
-      },
-      "ariaLabelEnd": {
-        "literalString": "MdSlider"
-      },
-      "ariaValueTextEnd": {
-        "literalString": "value"
-      },
-      "step": {
-        "literalNumber": 0
-      },
-      "ticks": {
-        "literalBoolean": false
-      },
-      "labeled": {
-        "literalString": "MdSlider"
-      },
-      "range": {
-        "literalBoolean": false
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdSlider",
+        "properties": {
+          "labeled": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdSlider-6"
       }
-    }
+    ]
   },
   {
     "name": "MdRipple",
@@ -974,207 +2777,544 @@
   {
     "name": "MdDialog",
     "tag": "Material",
-    "type": "MdDialog",
+    "type": "Column",
     "properties": {
-      "quick": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdDialog-0",
+        "ex-MdDialog-1",
+        "ex-MdDialog-2",
+        "ex-MdDialog-3",
+        "ex-MdDialog-4"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdDialog",
+        "properties": {
+          "children": [
+            "child-0-4345131648",
+            "child-1-4345131840",
+            "child-2-4345132416"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "Column",
+            "properties": { },
+            "id": "child-0-4345131648"
+          },
+          {
+            "type": "Text",
+            "properties": {
+              "text": {
+                "literalString": "A simple dialog with free-form content."
+              }
+            },
+            "id": "child-1-4345131840"
+          },
+          {
+            "type": "Column",
+            "properties": {
+              "children": [
+                "child-0-4345132352"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdTextButton",
+                "properties": {
+                  "form": {
+                    "literalString": "form-id"
+                  },
+                  "label": {
+                    "literalString": "Ok"
+                  }
+                },
+                "id": "child-0-4345132352"
+              }
+            ],
+            "id": "child-2-4345132416"
+          }
+        ],
+        "id": "ex-MdDialog-0"
       },
-      "returnValue": {
-        "literalString": "value"
+      {
+        "type": "MdDialog",
+        "properties": {
+          "open": {
+            "literalBoolean": true
+          },
+          "children": [
+            "child-0-4345133120"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "Column",
+            "properties": { },
+            "id": "child-0-4345133120"
+          }
+        ],
+        "id": "ex-MdDialog-1"
       },
-      "type": {
-        "literalString": "value"
+      {
+        "type": "MdDialog",
+        "properties": {
+          "open": {
+            "literalBoolean": true
+          },
+          "children": [
+            "child-0-4345133696",
+            "child-1-4345134592"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "Text",
+            "properties": {
+              "text": {
+                "literalString": "..."
+              }
+            },
+            "id": "child-0-4345133696"
+          },
+          {
+            "type": "Column",
+            "properties": {
+              "children": [
+                "child-0-4345134208",
+                "child-1-4345134528"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdTextButton",
+                "properties": {
+                  "form": {
+                    "literalString": "form-id"
+                  },
+                  "value": {
+                    "literalString": "cancel"
+                  },
+                  "label": {
+                    "literalString": "Cancel"
+                  }
+                },
+                "id": "child-0-4345134208"
+              },
+              {
+                "type": "MdTextButton",
+                "properties": {
+                  "form": {
+                    "literalString": "form-id"
+                  },
+                  "value": {
+                    "literalString": "ok"
+                  },
+                  "label": {
+                    "literalString": "Ok"
+                  }
+                },
+                "id": "child-1-4345134528"
+              }
+            ],
+            "id": "child-1-4345134592"
+          }
+        ],
+        "id": "ex-MdDialog-2"
       },
-      "noFocusTrap": {
-        "literalBoolean": false
+      {
+        "type": "MdDialog",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Error message"
+          },
+          "children": [
+            "child-0-4344643904"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "Column",
+            "properties": { },
+            "id": "child-0-4344643904"
+          }
+        ],
+        "id": "ex-MdDialog-3"
+      },
+      {
+        "type": "MdDialog",
+        "properties": {
+          "type": {
+            "literalString": "alert"
+          },
+          "children": [
+            "child-0-4344644416",
+            "child-1-4344644608",
+            "child-2-4344645504"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "Column",
+            "properties": { },
+            "id": "child-0-4344644416"
+          },
+          {
+            "type": "Text",
+            "properties": {
+              "text": {
+                "literalString": "Are you sure you wish to delete this item?"
+              }
+            },
+            "id": "child-1-4344644608"
+          },
+          {
+            "type": "Column",
+            "properties": {
+              "children": [
+                "child-0-4344645120",
+                "child-1-4344645440"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "MdTextButton",
+                "properties": {
+                  "form": {
+                    "literalString": "form-id"
+                  },
+                  "value": {
+                    "literalString": "cancel"
+                  },
+                  "label": {
+                    "literalString": "Cancel"
+                  }
+                },
+                "id": "child-0-4344645120"
+              },
+              {
+                "type": "MdTextButton",
+                "properties": {
+                  "form": {
+                    "literalString": "form-id"
+                  },
+                  "value": {
+                    "literalString": "delete"
+                  },
+                  "label": {
+                    "literalString": "Delete"
+                  }
+                },
+                "id": "child-1-4344645440"
+              }
+            ],
+            "id": "child-2-4344645504"
+          }
+        ],
+        "id": "ex-MdDialog-4"
       }
-    }
+    ]
   },
   {
     "name": "MdFilledTonalButton",
     "tag": "Material",
-    "type": "MdFilledTonalButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
-      },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "trailingIcon": {
-        "literalBoolean": false
-      },
-      "hasIcon": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
+      "alignment": "center",
+      "children": [
+        "ex-MdFilledTonalButton-0"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFilledTonalButton",
+        "properties": {
+          "label": {
+            "literalString": "Tonal"
+          }
+        },
+        "id": "ex-MdFilledTonalButton-0"
       }
-    }
+    ]
   },
   {
     "name": "MdFilledButton",
     "tag": "Material",
-    "type": "MdFilledButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdFilledButton-0",
+        "ex-MdFilledButton-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFilledButton",
+        "properties": {
+          "label": {
+            "literalString": "Complete"
+          }
+        },
+        "id": "ex-MdFilledButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "trailingIcon": {
-        "literalBoolean": false
-      },
-      "hasIcon": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdFilledButton",
+        "properties": {
+          "label": {
+            "literalString": "Filled"
+          }
+        },
+        "id": "ex-MdFilledButton-1"
       }
-    }
+    ]
   },
   {
     "name": "MdTextButton",
     "tag": "Material",
-    "type": "MdTextButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
-      },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "trailingIcon": {
-        "literalBoolean": false
-      },
-      "hasIcon": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
+      "alignment": "center",
+      "children": [
+        "ex-MdTextButton-0"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdTextButton",
+        "properties": {
+          "label": {
+            "literalString": "Text"
+          }
+        },
+        "id": "ex-MdTextButton-0"
       }
-    }
+    ]
   },
   {
     "name": "MdOutlinedButton",
     "tag": "Material",
-    "type": "MdOutlinedButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdOutlinedButton-0",
+        "ex-MdOutlinedButton-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdOutlinedButton",
+        "properties": {
+          "label": {
+            "literalString": "Back"
+          }
+        },
+        "id": "ex-MdOutlinedButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "trailingIcon": {
-        "literalBoolean": false
-      },
-      "hasIcon": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdOutlinedButton",
+        "properties": {
+          "label": {
+            "literalString": "Outlined"
+          }
+        },
+        "id": "ex-MdOutlinedButton-1"
       }
-    }
+    ]
   },
   {
     "name": "MdElevatedButton",
     "tag": "Material",
-    "type": "MdElevatedButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdElevatedButton-0",
+        "ex-MdElevatedButton-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdElevatedButton",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Add a new contact"
+          },
+          "label": {
+            "literalString": "Add"
+          }
+        },
+        "id": "ex-MdElevatedButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "trailingIcon": {
-        "literalBoolean": false
-      },
-      "hasIcon": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdElevatedButton",
+        "properties": {
+          "label": {
+            "literalString": "Elevated"
+          }
+        },
+        "id": "ex-MdElevatedButton-1"
       }
-    }
+    ]
   },
   {
     "name": "MdListItem",
     "tag": "Material",
     "type": "MdListItem",
-    "properties": {}
+    "properties": { }
   },
   {
     "name": "MdList",
     "tag": "Material",
-    "type": "MdList",
+    "type": "Column",
     "properties": {
-      "item": {
-        "literalString": "value"
+      "alignment": "center",
+      "children": [
+        "ex-MdList-0",
+        "ex-MdList-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdList",
+        "properties": {
+          "style": {
+            "literalString": "max-width: 300px;"
+          },
+          "children": [
+            "child-0-4344433728",
+            "child-1-4344433856",
+            "child-2-4344434048",
+            "child-3-4344434240",
+            "child-4-4344434624",
+            "child-5-4344435904"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdListItem",
+            "properties": {
+              "label": {
+                "literalString": "Fruits"
+              }
+            },
+            "id": "child-0-4344433728"
+          },
+          {
+            "type": "MdDivider",
+            "properties": { },
+            "id": "child-1-4344433856"
+          },
+          {
+            "type": "MdListItem",
+            "properties": {
+              "label": {
+                "literalString": "Apple"
+              }
+            },
+            "id": "child-2-4344434048"
+          },
+          {
+            "type": "MdListItem",
+            "properties": {
+              "label": {
+                "literalString": "Banana"
+              }
+            },
+            "id": "child-3-4344434240"
+          },
+          {
+            "type": "MdListItem",
+            "properties": {
+              "children": [
+                "child-0-4344434432",
+                "child-1-4344434560"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344434432"
+              },
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-1-4344434560"
+              }
+            ],
+            "id": "child-4-4344434624"
+          },
+          {
+            "type": "MdListItem",
+            "properties": {
+              "type": {
+                "literalString": "link"
+              },
+              "href": {
+                "literalString": "https://google.com/search?q=buy+kiwis&tbm=shop"
+              },
+              "target": {
+                "literalString": "_blank"
+              },
+              "children": [
+                "child-0-4344435392",
+                "child-1-4344435520",
+                "child-2-4344435840"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344435392"
+              },
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-1-4344435520"
+              },
+              {
+                "type": "MdIcon",
+                "properties": {
+                  "slot": {
+                    "literalString": "end"
+                  },
+                  "fontIcon": {
+                    "literalString": "open_in_new"
+                  }
+                },
+                "id": "child-2-4344435840"
+              }
+            ],
+            "id": "child-5-4344435904"
+          }
+        ],
+        "id": "ex-MdList-0"
+      },
+      {
+        "type": "MdList",
+        "properties": {
+          "style": {
+            "literalString": "max-width: 300px;"
+          },
+          "children": [
+            "child-0-4344436992"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdListItem",
+            "properties": { },
+            "id": "child-0-4344436992"
+          }
+        ],
+        "id": "ex-MdList-1"
       }
-    }
+    ]
   },
   {
     "name": "MdDivider",
@@ -1232,66 +3372,105 @@
   {
     "name": "MdMenu",
     "tag": "Material",
-    "type": "MdMenu",
+    "type": "Column",
     "properties": {
-      "anchor": {
-        "literalString": "value"
-      },
-      "positioning": {
-        "literalString": "value"
-      },
-      "quick": {
-        "literalBoolean": false
-      },
-      "hasOverflow": {
-        "literalBoolean": false
-      },
-      "open": {
-        "literalBoolean": false
-      },
-      "xOffset": {
-        "literalNumber": 0
-      },
-      "yOffset": {
-        "literalNumber": 0
-      },
-      "noHorizontalFlip": {
-        "literalBoolean": false
-      },
-      "noVerticalFlip": {
-        "literalBoolean": false
-      },
-      "typeaheadDelay": {
-        "literalNumber": 0
-      },
-      "anchorCorner": {
-        "literalString": "value"
-      },
-      "menuCorner": {
-        "literalString": "value"
-      },
-      "stayOpenOnOutsideClick": {
-        "literalBoolean": false
-      },
-      "stayOpenOnFocusout": {
-        "literalBoolean": false
-      },
-      "skipRestoreFocus": {
-        "literalBoolean": false
-      },
-      "defaultFocus": {
-        "literalString": "value"
-      },
-      "noNavigationWrap": {
-        "literalBoolean": false
-      },
-      "isSubmenu": {
-        "literalBoolean": false
-      },
-      "typeaheadController": {
-        "literalString": "value"
+      "alignment": "center",
+      "children": [
+        "ex-MdMenu-0"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdMenu",
+        "properties": {
+          "id": {
+            "literalString": "menu"
+          },
+          "anchor": {
+            "literalString": "textfield"
+          },
+          "role": {
+            "literalString": "listbox"
+          },
+          "ariaLabel": {
+            "literalString": "states"
+          },
+          "open": {
+            "literalBoolean": true
+          },
+          "children": [
+            "child-0-4344438976",
+            "child-1-4344439424",
+            "child-2-4344440000"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdMenuItem",
+            "properties": {
+              "type": {
+                "literalString": "option"
+              },
+              "id": {
+                "literalString": "0"
+              },
+              "children": [
+                "child-0-4344438912"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344438912"
+              }
+            ],
+            "id": "child-0-4344438976"
+          },
+          {
+            "type": "MdDivider",
+            "properties": {
+              "role": {
+                "literalString": "separator"
+              },
+              "tabindex": {
+                "literalString": "-1"
+              }
+            },
+            "id": "child-1-4344439424"
+          },
+          {
+            "type": "MdMenuItem",
+            "properties": {
+              "type": {
+                "literalString": "option"
+              },
+              "id": {
+                "literalString": "1"
+              },
+              "selected": {
+                "literalBoolean": true
+              },
+              "ariaSelected": {
+                "literalString": "true"
+              },
+              "children": [
+                "child-0-4344439936"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344439936"
+              }
+            ],
+            "id": "child-2-4344440000"
+          }
+        ],
+        "id": "ex-MdMenu-0"
       }
-    }
+    ]
   },
   {
     "name": "MdSubMenu",
@@ -1318,263 +3497,536 @@
   {
     "name": "MdSwitch",
     "tag": "Material",
-    "type": "MdSwitch",
+    "type": "Column",
     "properties": {
-      "selected": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdSwitch-0",
+        "ex-MdSwitch-1",
+        "ex-MdSwitch-2",
+        "ex-MdSwitch-3",
+        "ex-MdSwitch-4",
+        "ex-MdSwitch-5",
+        "ex-MdSwitch-6",
+        "ex-MdSwitch-7"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdSwitch",
+        "properties": { },
+        "id": "ex-MdSwitch-0"
       },
-      "icons": {
-        "literalBoolean": false
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "selected": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdSwitch-1"
       },
-      "showOnlySelectedIcon": {
-        "literalBoolean": false
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "icons": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdSwitch-2"
       },
-      "required": {
-        "literalBoolean": false
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "icons": {
+            "literalBoolean": true
+          },
+          "selected": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdSwitch-3"
       },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "icons": {
+            "literalBoolean": true
+          },
+          "showOnlySelectedIcon": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdSwitch-4"
       },
-      "disabled": {
-        "literalBoolean": false
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "icons": {
+            "literalBoolean": true
+          },
+          "showOnlySelectedIcon": {
+            "literalBoolean": true
+          },
+          "selected": {
+            "literalBoolean": true
+          }
+        },
+        "id": "ex-MdSwitch-5"
       },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "id": {
+            "literalString": "switch"
+          }
+        },
+        "id": "ex-MdSwitch-6"
+      },
+      {
+        "type": "MdSwitch",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Lights"
+          }
+        },
+        "id": "ex-MdSwitch-7"
       }
-    }
+    ]
   },
   {
     "name": "MdFilledIconButton",
     "tag": "Material",
-    "type": "MdFilledIconButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdFilledIconButton-0",
+        "ex-MdFilledIconButton-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFilledIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344656704"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344656704"
+          }
+        ],
+        "id": "ex-MdFilledIconButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "flipIconInRtl": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "ariaLabelSelected": {
-        "literalString": "MdFilledIconButton"
-      },
-      "toggle": {
-        "literalBoolean": false
-      },
-      "selected": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
-      },
-      "filled": {
-        "literalBoolean": false
+      {
+        "type": "MdFilledIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344431872"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344431872"
+          }
+        ],
+        "id": "ex-MdFilledIconButton-1"
       }
-    }
+    ]
   },
   {
     "name": "MdFilledTonalIconButton",
     "tag": "Material",
-    "type": "MdFilledTonalIconButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdFilledTonalIconButton-0",
+        "ex-MdFilledTonalIconButton-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFilledTonalIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344657216"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344657216"
+          }
+        ],
+        "id": "ex-MdFilledTonalIconButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "flipIconInRtl": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "ariaLabelSelected": {
-        "literalString": "MdFilledTonalIconButton"
-      },
-      "toggle": {
-        "literalBoolean": false
-      },
-      "selected": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
+      {
+        "type": "MdFilledTonalIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344432384"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344432384"
+          }
+        ],
+        "id": "ex-MdFilledTonalIconButton-1"
       }
-    }
+    ]
   },
   {
     "name": "MdOutlinedIconButton",
     "tag": "Material",
-    "type": "MdOutlinedIconButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdOutlinedIconButton-0",
+        "ex-MdOutlinedIconButton-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdOutlinedIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344657728"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344657728"
+          }
+        ],
+        "id": "ex-MdOutlinedIconButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
-      },
-      "flipIconInRtl": {
-        "literalBoolean": false
-      },
-      "href": {
-        "literalString": "value"
-      },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "ariaLabelSelected": {
-        "literalString": "MdOutlinedIconButton"
-      },
-      "toggle": {
-        "literalBoolean": false
-      },
-      "selected": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
-      },
-      "outlined": {
-        "literalBoolean": false
+      {
+        "type": "MdOutlinedIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344432896"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344432896"
+          }
+        ],
+        "id": "ex-MdOutlinedIconButton-1"
       }
-    }
+    ]
   },
   {
     "name": "MdIconButton",
     "tag": "Material",
-    "type": "MdIconButton",
+    "type": "Column",
     "properties": {
-      "disabled": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdIconButton-0",
+        "ex-MdIconButton-1",
+        "ex-MdIconButton-2",
+        "ex-MdIconButton-3",
+        "ex-MdIconButton-4"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344656192"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344656192"
+          }
+        ],
+        "id": "ex-MdIconButton-0"
       },
-      "softDisabled": {
-        "literalBoolean": false
+      {
+        "type": "MdIconButton",
+        "properties": {
+          "href": {
+            "literalString": "https://google.com"
+          },
+          "children": [
+            "child-0-4344658368"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344658368"
+          }
+        ],
+        "id": "ex-MdIconButton-1"
       },
-      "flipIconInRtl": {
-        "literalBoolean": false
+      {
+        "type": "MdIconButton",
+        "properties": {
+          "ariaLabel": {
+            "literalString": "Search for Contact"
+          },
+          "children": [
+            "child-0-4344659008"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "search"
+              }
+            },
+            "id": "child-0-4344659008"
+          }
+        ],
+        "id": "ex-MdIconButton-2"
       },
-      "href": {
-        "literalString": "value"
+      {
+        "type": "MdIconButton",
+        "properties": {
+          "toggle": {
+            "literalBoolean": true
+          },
+          "ariaLabel": {
+            "literalString": "Unselected"
+          },
+          "ariaLabelSelected": {
+            "literalString": "Selected"
+          },
+          "children": [
+            "child-0-4344659840",
+            "child-1-4344430848"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "close"
+              }
+            },
+            "id": "child-0-4344659840"
+          },
+          {
+            "type": "MdIcon",
+            "properties": {
+              "slot": {
+                "literalString": "selected"
+              },
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-1-4344430848"
+          }
+        ],
+        "id": "ex-MdIconButton-3"
       },
-      "download": {
-        "literalString": "value"
-      },
-      "target": {
-        "literalString": "value"
-      },
-      "ariaLabelSelected": {
-        "literalString": "MdIconButton"
-      },
-      "toggle": {
-        "literalBoolean": false
-      },
-      "selected": {
-        "literalBoolean": false
-      },
-      "type": {
-        "literalString": "value"
-      },
-      "value": {
-        "literalString": "value"
-      },
-      "standard": {
-        "literalBoolean": false
+      {
+        "type": "MdIconButton",
+        "properties": {
+          "children": [
+            "child-0-4344431296"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdIcon",
+            "properties": {
+              "fontIcon": {
+                "literalString": "check"
+              }
+            },
+            "id": "child-0-4344431296"
+          }
+        ],
+        "id": "ex-MdIconButton-4"
       }
-    }
+    ]
   },
   {
     "name": "MdFilledSelect",
     "tag": "Material",
-    "type": "MdFilledSelect",
+    "type": "Column",
     "properties": {
-      "delegatesFocus": {
-        "literalBoolean": false
+      "alignment": "center",
+      "children": [
+        "ex-MdFilledSelect-0",
+        "ex-MdFilledSelect-1"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdFilledSelect",
+        "properties": {
+          "children": [
+            "child-0-4344446528",
+            "child-1-4344446848",
+            "child-2-4344594880"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "ariaLabel": {
+                "literalString": "blank"
+              }
+            },
+            "id": "child-0-4344446528"
+          },
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "value": {
+                "literalString": "apple"
+              },
+              "children": [
+                "child-0-4344446784"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344446784"
+              }
+            ],
+            "id": "child-1-4344446848"
+          },
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "value": {
+                "literalString": "apricot"
+              },
+              "children": [
+                "child-0-4344594816"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344594816"
+              }
+            ],
+            "id": "child-2-4344594880"
+          }
+        ],
+        "id": "ex-MdFilledSelect-0"
       },
-      "mode": {
-        "literalString": "value"
-      },
-      "serializable": {
-        "literalBoolean": false
-      },
-      "slotAssignment": {
-        "literalString": "value"
-      },
-      "quick": {
-        "literalBoolean": false
-      },
-      "required": {
-        "literalBoolean": false
-      },
-      "errorText": {
-        "literalString": "value"
-      },
-      "label": {
-        "literalString": "MdFilledSelect"
-      },
-      "noAsterisk": {
-        "literalBoolean": false
-      },
-      "supportingText": {
-        "literalString": "value"
-      },
-      "error": {
-        "literalBoolean": false
-      },
-      "menuPositioning": {
-        "literalString": "value"
-      },
-      "clampMenuWidth": {
-        "literalBoolean": false
-      },
-      "typeaheadDelay": {
-        "literalNumber": 0
-      },
-      "hasLeadingIcon": {
-        "literalBoolean": false
-      },
-      "displayText": {
-        "literalString": "value"
-      },
-      "menuAlign": {
-        "literalString": "value"
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      {
+        "type": "MdFilledSelect",
+        "properties": {
+          "required": {
+            "literalBoolean": true
+          },
+          "children": [
+            "child-0-4344595904",
+            "child-1-4344596416"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "value": {
+                "literalString": "one"
+              },
+              "children": [
+                "child-0-4344595840"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344595840"
+              }
+            ],
+            "id": "child-0-4344595904"
+          },
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "value": {
+                "literalString": "two"
+              },
+              "children": [
+                "child-0-4344596352"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344596352"
+              }
+            ],
+            "id": "child-1-4344596416"
+          }
+        ],
+        "id": "ex-MdFilledSelect-1"
       }
-    }
+    ]
   },
   {
     "name": "MdSelectOption",
@@ -1613,71 +4065,99 @@
   {
     "name": "MdOutlinedSelect",
     "tag": "Material",
-    "type": "MdOutlinedSelect",
+    "type": "Column",
     "properties": {
-      "delegatesFocus": {
-        "literalBoolean": false
-      },
-      "mode": {
-        "literalString": "value"
-      },
-      "serializable": {
-        "literalBoolean": false
-      },
-      "slotAssignment": {
-        "literalString": "value"
-      },
-      "quick": {
-        "literalBoolean": false
-      },
-      "required": {
-        "literalBoolean": false
-      },
-      "errorText": {
-        "literalString": "value"
-      },
-      "label": {
-        "literalString": "MdOutlinedSelect"
-      },
-      "noAsterisk": {
-        "literalBoolean": false
-      },
-      "supportingText": {
-        "literalString": "value"
-      },
-      "error": {
-        "literalBoolean": false
-      },
-      "menuPositioning": {
-        "literalString": "value"
-      },
-      "clampMenuWidth": {
-        "literalBoolean": false
-      },
-      "typeaheadDelay": {
-        "literalNumber": 0
-      },
-      "hasLeadingIcon": {
-        "literalBoolean": false
-      },
-      "displayText": {
-        "literalString": "value"
-      },
-      "menuAlign": {
-        "literalString": "value"
-      },
-      "disabled": {
-        "literalBoolean": false
-      },
-      "name": {
-        "literalString": "value"
+      "alignment": "center",
+      "children": [
+        "ex-MdOutlinedSelect-0"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdOutlinedSelect",
+        "properties": {
+          "children": [
+            "child-0-4344444736",
+            "child-1-4344445120",
+            "child-2-4344445632"
+          ]
+        },
+        "children_definitions": [
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "ariaLabel": {
+                "literalString": "blank"
+              }
+            },
+            "id": "child-0-4344444736"
+          },
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "selected": {
+                "literalBoolean": true
+              },
+              "value": {
+                "literalString": "apple"
+              },
+              "children": [
+                "child-0-4344445056"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344445056"
+              }
+            ],
+            "id": "child-1-4344445120"
+          },
+          {
+            "type": "MdSelectOption",
+            "properties": {
+              "value": {
+                "literalString": "apricot"
+              },
+              "children": [
+                "child-0-4344445568"
+              ]
+            },
+            "children_definitions": [
+              {
+                "type": "Column",
+                "properties": { },
+                "id": "child-0-4344445568"
+              }
+            ],
+            "id": "child-2-4344445632"
+          }
+        ],
+        "id": "ex-MdOutlinedSelect-0"
       }
-    }
+    ]
   },
   {
     "name": "MdIcon",
     "tag": "Material",
-    "type": "MdIcon",
-    "properties": {}
+    "type": "Column",
+    "properties": {
+      "alignment": "center",
+      "children": [
+        "ex-MdIcon-0"
+      ]
+    },
+    "children_definitions": [
+      {
+        "type": "MdIcon",
+        "properties": {
+          "tabindex": {
+            "literalString": "-1"
+          }
+        },
+        "id": "ex-MdIcon-0"
+      }
+    ]
   }
 ]
