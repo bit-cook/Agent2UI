@@ -737,7 +737,7 @@
     },
     {
       "name": "formatNumber",
-      "description": "Formats a number with the specified grouping and decimal precision. Example: `formatNumber(1234.56, 1, true)` -> '1,234.6'.",
+      "description": "Formats a number with the specified grouping and decimal precision.",
       "returnType": "string",
       "parameters": {
         "type": "object",
@@ -760,7 +760,7 @@
     },
     {
       "name": "formatCurrency",
-      "description": "Formats a number as a currency string. Example: `formatCurrency(1234.5, 'USD')` -> '$1,234.50'.",
+      "description": "Formats a number as a currency string.",
       "returnType": "string",
       "parameters": {
         "type": "object",
@@ -779,7 +779,7 @@
     },
     {
       "name": "formatDate",
-      "description": "Formats a timestamp into a string using a pattern. Example: `formatDate('2023-01-01', 'MMM dd')` -> 'Jan 01'.",
+      "description": "Formats a timestamp into a string using a pattern.",
       "returnType": "string",
       "parameters": {
         "type": "object",
@@ -798,7 +798,7 @@
     },
     {
       "name": "pluralize",
-      "description": "Returns the singular string if the count is 1, otherwise returns the plural string. Example: `pluralize(2, 'item', 'items')` -> 'items'.",
+      "description": "Returns the singular string if the count is 1, otherwise returns the plural string.",
       "returnType": "string",
       "parameters": {
         "type": "object",
