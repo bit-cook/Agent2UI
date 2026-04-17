@@ -76,3 +76,11 @@ export const getBaseContainerStyle = (): React.CSSProperties => ({
   borderRadius: STANDARD_RADIUS,
   boxSizing: 'border-box',
 });
+
+// `min-width: 0` / `min-height: 0` let weighted children shrink below their
+// intrinsic content size. Without them, a component with large content would
+// force the container to overflow.
+export const getWeightStyle = (weight?: number): React.CSSProperties => {
+  if (typeof weight !== 'number') return {};
+  return {flex: `${weight}`, minWidth: 0, minHeight: 0};
+};
